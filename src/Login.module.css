@@ -144,8 +144,8 @@
     width: 704px;
     min-height: 100vh;
     margin: 0 auto;
-    border-radius: 0; /* kart sınırı kalkıyor */
-    box-shadow: none; /* gölge kalkıyor */
+    border-radius: 0;
+    box-shadow: none;
     background: var(--bg-card) url("./assets/all.jpg") no-repeat right bottom;
     background-size: cover;
     display: flex;
@@ -170,7 +170,7 @@
 
   .loginTab {
     font-size: 16px;
-    padding: 0; /* nav link gibi dursun */
+    padding: 0;
     color: #9b9faa;
   }
   .loginActive {
@@ -200,13 +200,92 @@
     margin-top: 40px;
     margin-bottom: 80px;
   }
-  .loginOutlineBtn{
-    background-color: white ;
+  .loginOutlineBtn {
+    background-color: white;
   }
 }
 
+/*  DESKTOP (1200px) */
 @media (min-width: 1200px) {
   .loginWrap {
-    width: 440px;
+    width: 100%;
+    max-width: none;
+    min-height: 100dvh;
+    margin: 0;
+    border-radius: 0;
+    box-shadow: none;
+    display: flex;
+    flex-direction: column;
+    background-size: contain;
+  
+  }
+
+  .loginHeader {
+    display: flex;
+    justify-content: flex-start;
+    padding: 28px 48px;
+    border-bottom: none;
+  }
+
+  .loginLogo img {
+    height: 40px;
+    width: auto;
+  }
+
+  .loginHeaderTabs {
+    display: flex;
+    gap: 28px;
+    margin-top: 20px;
+  }
+
+  .loginTab {
+    font-size: 15px;
+    padding: 0;
+    color: #9b9faa;
+  }
+  .loginActive {
+    color: var(--text);
+  }
+  .loginActive::after {
+    bottom: -12px;
+  }
+
+  .loginForm {
+    width: 460px;
+    padding: 0 48px 64px;
+  }
+
+  .loginTitle {
+    text-align: left;
+    font-size: 16px;
+    margin-top: 140px;
+    margin-bottom: 36px;
+    color: var(--orange-500);
+  }
+
+  .loginLabel {
+    font-size: 14px;
+  }
+  .loginInput {
+    font-size: 15px;
+    padding: 10px 0;
+  }
+
+  .loginBtnAll {
+    flex-direction: row;
+    gap: 24px;
+    justify-content: flex-start;
+    margin-top: 28px;
+    margin-bottom: 120px;
+  }
+
+  .loginPrimaryBtn,
+  .loginOutlineBtn {
+    width: 182px;
+    height: 44px;
+  }
+
+  .loginOutlineBtn {
+    background-color: #fff;
   }
 }
