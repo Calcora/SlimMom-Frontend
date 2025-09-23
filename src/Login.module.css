@@ -9,19 +9,21 @@
 } /* kart */
 .loginWrap {
   width: min(312px, 92vw);
+  height: auto;
   margin: 24px auto;
   background: var(--bg-card);
   border-radius: 12px;
   box-shadow: var(--shadow-card);
   overflow: hidden;
   font-family: Verdana, Geneva, Tahoma, sans-serif;
-} 
+}
 .loginHeader {
   display: flex;
-  
+  justify-content: space-between;
+  margin-bottom: 40px;
   align-items: center;
   padding: 12px 14px;
-  border-bottom: 1px solid var(--line);
+  border-bottom: 4px solid var(--line);
 } /* logo */
 
 .loginLogo img {
@@ -32,19 +34,19 @@
   font-size: 14px;
   font-weight: 700;
   color: var(--orange-500);
-} 
+}
 
-.loginTab {  
+.loginTab {
   background: transparent;
   border: 0;
   padding: 10px 12px;
-  font-size: 10px;
+  font-size: 14px;
   font-weight: 700;
   color: #a1a6ae;
   cursor: pointer;
   font-family: inherit;
-  margin-top: 15px ;
   line-height: 100%;
+ 
 }
 .loginActive {
   color: var(--text);
@@ -59,9 +61,11 @@
 .loginTitle {
   margin: 4px 0 6px;
   text-align: center;
-  font-size: 12px;
+  font-size: 14px;
   font-weight: 700;
+  letter-spacing: 0.4px;
   color: var(--orange-500);
+  margin-bottom: 55px;
 }
 .loginLabel {
   font-weight: 700;
@@ -82,8 +86,19 @@
 .loginInput:focus {
   border-bottom: 2px solid var(--orange-500);
 } /* butonlar */
+
+.loginBtnAll {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  align-items: center;
+  justify-content: center;
+  margin-top: 60px;
+  margin-bottom: 150px;
+}
 .loginPrimaryBtn {
-  height: 46px;
+  width: 182px;
+  height: 44px;
   border: 0;
   border-radius: 9999px;
   background: var(--orange-500);
@@ -106,6 +121,7 @@
   cursor: not-allowed;
 }
 .loginOutlineBtn {
+  width: 180px;
   height: 44px;
   border-radius: 9999px;
   background: transparent;

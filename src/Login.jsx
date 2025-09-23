@@ -1,6 +1,6 @@
 import { useState } from "react";
 import styles from "./Login.module.css";
-import logo from "./assets/logo.png"; 
+import mobilLogo from "./assets/mobilLogo.png";
 
 export default function Login({ onSubmit, onSwitchTab }) {
   const [email, setEmail] = useState("");
@@ -17,7 +17,7 @@ export default function Login({ onSubmit, onSwitchTab }) {
     <div className={styles.loginWrap}>
       <div className={styles.loginHeader}>
         <div className={styles.loginLogo}>
-          <img src={logo} alt="SlimMom logo" />
+          <img src={mobilLogo} alt="SlimMom logo" />
         </div>
 
         <button
@@ -64,22 +64,23 @@ export default function Login({ onSubmit, onSwitchTab }) {
           onChange={(e) => setPassword(e.target.value)}
           required
         />
-
-        <button
-          type="submit"
-          className={styles.loginPrimaryBtn}
-          disabled={!canSubmit}
-        >
-          Log in
-        </button>
-
-        <button
-          type="button"
-          className={styles.loginOutlineBtn}
-          onClick={() => onSwitchTab?.("register")}
-        >
-          Register
-        </button>
+        <div className={styles.loginBtnAll}>
+          {" "}
+          <button
+            type="submit"
+            className={styles.loginPrimaryBtn}
+            disabled={!canSubmit}
+          >
+            Log in
+          </button>
+          <button
+            type="button"
+            className={styles.loginOutlineBtn}
+            onClick={() => onSwitchTab?.("register")}
+          >
+            Register
+          </button>
+        </div>
       </form>
     </div>
   );
