@@ -46,7 +46,6 @@
   cursor: pointer;
   font-family: inherit;
   line-height: 100%;
- 
 }
 .loginActive {
   color: var(--text);
@@ -142,9 +141,70 @@
 } /* responsive */
 @media (min-width: 768px) {
   .loginWrap {
+    width: 704px;
+    min-height: 100vh;
+    margin: 0 auto;
+    border-radius: 0; /* kart sınırı kalkıyor */
+    box-shadow: none; /* gölge kalkıyor */
+    background: var(--bg-card) url("./assets/all.jpg") no-repeat right bottom;
+    background-size: cover;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .loginHeader {
+    padding: 20px 32px;
+    display: flex;
+    justify-content: space-between;
+    gap: 24px;
+  }
+
+  .loginLogo img {
+    height: 32px;
+  }
+
+  .loginHeaderTabs {
+    display: flex;
+    gap: 24px;
+  }
+
+  .loginTab {
+    font-size: 16px;
+    padding: 0; /* nav link gibi dursun */
+    color: #9b9faa;
+  }
+  .loginActive {
+    color: var(--text);
+  }
+  .loginActive::after {
+    bottom: -10px;
+  }
+
+  .loginForm {
     width: 380px;
+    padding: 20px 32px 32px;
+  }
+
+  .loginTitle {
+    font-size: 16px;
+    margin-bottom: 40px;
+    text-align: left;
+    margin-top: 176px;
+  }
+
+  /* Butonlar yan yana */
+  .loginBtnAll {
+    flex-direction: row;
+    gap: 20px;
+    justify-content: flex-start;
+    margin-top: 40px;
+    margin-bottom: 80px;
+  }
+  .loginOutlineBtn{
+    background-color: white ;
   }
 }
+
 @media (min-width: 1200px) {
   .loginWrap {
     width: 440px;
