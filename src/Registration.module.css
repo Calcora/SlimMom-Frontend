@@ -8,7 +8,7 @@
   --shadow-cta: 0 6px 14px rgba(255, 122, 26, 0.35);
 }
 
-/* ===== MOBIL (default) ===== */
+/* MOBIL  */
 .registrationWrap {
   width: min(312px, 92vw);
   height: auto;
@@ -29,13 +29,11 @@
   border-bottom: 4px solid var(--line);
 }
 
-/* Logo (img veya <picture><img class="logoImg">) */
+
 .registrationLogo img { height: 28px; width: auto; display: block; }
 .logoImg { height: 28px; width: auto; display: block; }
 
-.registrationHeaderTabs {
-  /* mobilde özel hizaya gerek yok; buton stilleri yeterli */
-}
+
 
 .registrationTab {
   background: transparent;
@@ -139,7 +137,7 @@
   border-color: var(--orange-500);
 }
 
-/* ===== TABLET (>=768px) ===== */
+/* TABLET 768px*/
 @media (min-width: 768px) {
   .registrationWrap {
     width: 704px;
@@ -187,7 +185,7 @@
     font-size: 16px;
     margin-bottom: 40px;
     text-align: left;
-    margin-top: 176px; /* tablet referans hiza */
+    margin-top: 176px; 
   }
 
   .registrationBtnAll {
@@ -201,7 +199,7 @@
   .registrationOutlineBtn { background-color: #fff; }
 }
 
-/* ===== DESKTOP (>=1200px) ===== */
+/* DESKTOP (1200px)  */
 @media (min-width: 1200px) {
   .registrationWrap {
     width: 100%;
@@ -212,13 +210,12 @@
     box-shadow: none;
     display: flex;
     flex-direction: column;
-    /* tablet katmanındaki background korunur; burada sadece boyut davranışı */
-    background-size: contain; /* Login’de yaptığın gibi */
+    background-size: contain; 
   }
 
   .registrationHeader {
     display: flex;
-    justify-content: flex-start; /* tasarımına uygun */
+    justify-content: flex-start; 
     padding: 28px 48px;
     border-bottom: none;
   }
