@@ -6,8 +6,10 @@
   --orange-500: #fc842d;
   --shadow-card: 0 8px 24px rgba(0, 0, 0, 0.06);
   --shadow-cta: 0 6px 14px rgba(255, 122, 26, 0.35);
-} /* kart */
-.loginWrap {
+}
+
+/* MOBIL  */
+.registrationWrap {
   width: min(312px, 92vw);
   height: auto;
   margin: 24px auto;
@@ -17,26 +19,28 @@
   overflow: hidden;
   font-family: Verdana, Geneva, Tahoma, sans-serif;
 }
-.loginHeader {
+
+.registrationHeader {
   display: flex;
   justify-content: space-between;
   margin-bottom: 40px;
   align-items: center;
   padding: 12px 14px;
   border-bottom: 4px solid var(--line);
-} /* logo */
+}
 
-.loginLogo img {
+.registrationLogo img {
   height: 28px;
   width: auto;
+  display: block;
 }
-.loginLogo span {
-  font-size: 14px;
-  font-weight: 700;
-  color: var(--orange-500);
+.logoImg {
+  height: 28px;
+  width: auto;
+  display: block;
 }
 
-.loginTab {
+.registrationTab {
   background: transparent;
   border: 0;
   padding: 10px 12px;
@@ -47,17 +51,19 @@
   font-family: inherit;
   line-height: 100%;
 }
-.loginActive {
+
+.registrationActive {
   color: var(--text);
   position: relative;
 }
 
-.loginForm {
+.registrationForm {
   display: grid;
   padding: 18px 16px 22px;
   gap: 14px;
 }
-.loginTitle {
+
+.registrationTitle {
   margin: 4px 0 6px;
   text-align: center;
   font-size: 14px;
@@ -66,13 +72,15 @@
   color: var(--orange-500);
   margin-bottom: 55px;
 }
-.loginLabel {
+
+.registrationLabel {
   font-weight: 700;
   font-size: 14px;
   color: var(--label);
   font-family: Verdana, Geneva, Tahoma, sans-serif;
 }
-.loginInput {
+
+.registrationInput {
   width: 100%;
   border: none;
   outline: none;
@@ -82,11 +90,11 @@
   background: transparent;
   font-family: inherit;
 }
-.loginInput:focus {
+.registrationInput:focus {
   border-bottom: 2px solid var(--orange-500);
-} /* butonlar */
+}
 
-.loginBtnAll {
+.registrationBtnAll {
   display: flex;
   flex-direction: column;
   gap: 12px;
@@ -95,7 +103,8 @@
   margin-top: 60px;
   margin-bottom: 150px;
 }
-.loginPrimaryBtn {
+
+.registrationPrimaryBtn {
   width: 182px;
   height: 44px;
   border: 0;
@@ -109,17 +118,18 @@
   transition: filter 0.2s ease, transform 0.06s ease;
   font-family: inherit;
 }
-.loginPrimaryBtn:hover {
+.registrationPrimaryBtn:hover {
   filter: brightness(1.03);
 }
-.loginPrimaryBtn:active {
+.registrationPrimaryBtn:active {
   transform: translateY(1px);
   box-shadow: 0 3px 8px rgba(255, 122, 26, 0.28);
 }
-.loginPrimaryBtn:disabled {
+.registrationPrimaryBtn:disabled {
   cursor: not-allowed;
 }
-.loginOutlineBtn {
+
+.registrationOutlineBtn {
   width: 180px;
   height: 44px;
   border-radius: 9999px;
@@ -132,15 +142,17 @@
   transition: background 0.15s ease, color 0.15s ease, border-color 0.15s ease;
   font-family: inherit;
 }
-.loginOutlineBtn:hover {
+.registrationOutlineBtn:hover {
   background: rgba(255, 122, 26, 0.06);
 }
-.loginOutlineBtn:active {
+.registrationOutlineBtn:active {
   background: rgba(255, 122, 26, 0.1);
   border-color: var(--orange-500);
-} /* responsive */
+}
+
+/* TABLET 768px */
 @media (min-width: 768px) {
-  .loginWrap {
+  .registrationWrap {
     width: 704px;
     min-height: 100vh;
     margin: 0 auto;
@@ -153,62 +165,75 @@
     flex-direction: column;
   }
 
-  .loginHeader {
+  .registrationHeader {
     padding: 20px 32px;
     display: flex;
     justify-content: space-between;
     gap: 24px;
+    border-bottom: none;
   }
 
-  .loginLogo img {
+  .registrationLogo img {
+    height: 32px;
+  }
+  .logoImg {
     height: 32px;
   }
 
-  .loginHeaderTabs {
+  .registrationHeaderTabs {
     display: flex;
     gap: 24px;
   }
 
-  .loginTab {
+  .registrationTab {
     font-size: 16px;
     padding: 0;
     color: #9b9faa;
   }
-  .loginActive {
+
+  .registrationActive {
     color: var(--text);
   }
-  .loginActive::after {
+  .registrationActive::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    right: 0;
     bottom: -10px;
+    height: 2px;
+    background: var(--text);
+    border-radius: 2px;
+    opacity: 0.85;
   }
 
-  .loginForm {
+  .registrationForm {
     width: 380px;
     padding: 20px 32px 32px;
   }
 
-  .loginTitle {
+  .registrationTitle {
     font-size: 16px;
     margin-bottom: 40px;
     text-align: left;
     margin-top: 176px;
   }
 
-  /* Butonlar yan yana */
-  .loginBtnAll {
+  .registrationBtnAll {
     flex-direction: row;
     gap: 20px;
     justify-content: flex-start;
     margin-top: 40px;
     margin-bottom: 80px;
   }
-  .loginOutlineBtn {
-    background-color: white;
+
+  .registrationOutlineBtn {
+    background-color: #fff;
   }
 }
 
-/*  DESKTOP (1200px) */
+/* DESKTOP (1200px)  */
 @media (min-width: 1200px) {
-  .loginWrap {
+  .registrationWrap {
     width: 100%;
     max-width: none;
     min-height: 100dvh;
@@ -218,46 +243,49 @@
     display: flex;
     flex-direction: column;
     background-size: contain;
-    background: var(--bg-card) url("./assets/all.jpg") no-repeat right
-      bottom;
+    background: var(--bg-card) url("./assets/all.jpg") no-repeat right bottom;
   }
 
-  .loginHeader {
+  .registrationHeader {
     display: flex;
     justify-content: flex-start;
     padding: 28px 48px;
     border-bottom: none;
   }
 
-  .loginLogo img {
+  .registrationLogo img {
     height: 40px;
     width: auto;
   }
+  .logoImg {
+    height: 40px;
+  }
 
-  .loginHeaderTabs {
+  .registrationHeaderTabs {
     display: flex;
     gap: 28px;
     margin-top: 20px;
   }
 
-  .loginTab {
+  .registrationTab {
     font-size: 15px;
     padding: 0;
     color: #9b9faa;
   }
-  .loginActive {
+
+  .registrationActive {
     color: var(--text);
   }
-  .loginActive::after {
+  .registrationActive::after {
     bottom: -12px;
   }
 
-  .loginForm {
+  .registrationForm {
     width: 460px;
     padding: 0 48px 64px;
   }
 
-  .loginTitle {
+  .registrationTitle {
     text-align: left;
     font-size: 16px;
     margin-top: 140px;
@@ -265,15 +293,15 @@
     color: var(--orange-500);
   }
 
-  .loginLabel {
+  .registrationLabel {
     font-size: 14px;
   }
-  .loginInput {
+  .registrationInput {
     font-size: 15px;
     padding: 10px 0;
   }
 
-  .loginBtnAll {
+  .registrationBtnAll {
     flex-direction: row;
     gap: 24px;
     justify-content: flex-start;
@@ -281,13 +309,13 @@
     margin-bottom: 120px;
   }
 
-  .loginPrimaryBtn,
-  .loginOutlineBtn {
+  .registrationPrimaryBtn,
+  .registrationOutlineBtn {
     width: 182px;
     height: 44px;
   }
 
-  .loginOutlineBtn {
+  .registrationOutlineBtn {
     background-color: #fff;
   }
 }

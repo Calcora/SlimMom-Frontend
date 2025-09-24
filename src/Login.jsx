@@ -1,6 +1,7 @@
 import { useState } from "react";
 import styles from "./Login.module.css";
-import logo from "./assets/logo.png"; 
+import mobilLogo from "./assets/mobilLogo.png";
+import tabletLogo from "./assets/logo.png";
 
 export default function Login({ onSubmit, onSwitchTab }) {
   const [email, setEmail] = useState("");
@@ -17,23 +18,46 @@ export default function Login({ onSubmit, onSwitchTab }) {
     <div className={styles.loginWrap}>
       <div className={styles.loginHeader}>
         <div className={styles.loginLogo}>
-          <img src={logo} alt="SlimMom logo" />
+          <picture>
+            {/* 1200px+ için */}
+            <source
+              media="(min-width: 1200px)"
+              srcSet={tabletLogo}
+              
+            />
+            {/* 768px+ için */}
+            <source
+              media="(min-width: 768px)"
+              srcSet={tabletLogo}
+             
+            />
+            {/* Default: mobil */}
+            <img
+              src={mobilLogo}
+              alt="SlimMom"
+              className={styles.logoImg}
+              width="120"
+              height="28"
+              decoding="async"
+            />
+          </picture>
         </div>
+        <div className={styles.loginHeaderTabs}>
+          <button
+            type="button"
+            className={`${styles.loginTab} ${styles.loginActive}`}
+          >
+            LOG IN
+          </button>
 
-        <button
-          type="button"
-          className={`${styles.loginTab} ${styles.loginActive}`}
-        >
-          LOG IN
-        </button>
-
-        <button
-          type="button"
-          className={styles.loginTab}
-          onClick={() => onSwitchTab?.("register")}
-        >
-          REGISTRATION
-        </button>
+          <button
+            type="button"
+            className={styles.loginTab}
+            onClick={() => onSwitchTab?.("register")}
+          >
+            REGISTRATION
+          </button>
+        </div>
       </div>
 
       <form className={styles.loginForm} onSubmit={handleSubmit} noValidate>
@@ -64,22 +88,23 @@ export default function Login({ onSubmit, onSwitchTab }) {
           onChange={(e) => setPassword(e.target.value)}
           required
         />
-
-        <button
-          type="submit"
-          className={styles.loginPrimaryBtn}
-          disabled={!canSubmit}
-        >
-          Log in
-        </button>
-
-        <button
-          type="button"
-          className={styles.loginOutlineBtn}
-          onClick={() => onSwitchTab?.("register")}
-        >
-          Register
-        </button>
+        <div className={styles.loginBtnAll}>
+          {" "}
+          <button
+            type="submit"
+            className={styles.loginPrimaryBtn}
+            disabled={!canSubmit}
+          >
+            Log in
+          </button>
+          <button
+            type="button"
+            className={styles.loginOutlineBtn}
+            onClick={() => onSwitchTab?.("register")}
+          >
+            Register
+          </button>
+        </div>
       </form>
     </div>
   );
