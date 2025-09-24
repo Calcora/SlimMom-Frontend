@@ -146,7 +146,8 @@
     margin: 0 auto;
     border-radius: 0;
     box-shadow: none;
-    background: var(--bg-card) url("./assets/all.jpg") no-repeat right bottom;
+    background: var(--bg-card) url("./assets/tabletLogo.png") no-repeat right
+      bottom;
     background-size: cover;
     display: flex;
     flex-direction: column;
@@ -217,7 +218,8 @@
     display: flex;
     flex-direction: column;
     background-size: contain;
-  
+    background: var(--bg-card) url("./assets/all.jpg") no-repeat right
+      bottom;
   }
 
   .loginHeader {
