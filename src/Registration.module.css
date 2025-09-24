@@ -137,7 +137,7 @@
   border-color: var(--orange-500);
 }
 
-/* TABLET 768px*/
+/* TABLET 768px */
 @media (min-width: 768px) {
   .registrationWrap {
     width: 704px;
