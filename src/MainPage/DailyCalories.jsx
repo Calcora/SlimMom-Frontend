@@ -26,65 +26,67 @@ const DailyCaloriesForm = () => {
         Calculate your daily calorie intake right now
       </h2>
 
-      <div className={styles.inputGroup}>
-        <label>Height *</label>
-        <input
-          type="number"
-          name="height"
-          value={formData.height}
-          onChange={handleChange}
-          required
-        />
-      </div>
+      <div className={styles.inputsWrapper}>
+        <div className={styles.inputGroup}>
+          <label>Height *</label>
+          <input
+            type="number"
+            name="height"
+            value={formData.height}
+            onChange={handleChange}
+            required
+          />
+        </div>
 
-      <div className={styles.inputGroup}>
-        <label>Age *</label>
-        <input
-          type="number"
-          name="age"
-          value={formData.age}
-          onChange={handleChange}
-          required
-        />
-      </div>
+        <div className={styles.inputGroup}>
+          <label>Desired weight *</label>
+          <input
+            type="number"
+            name="desiredWeight"
+            value={formData.desiredWeight}
+            onChange={handleChange}
+            required
+          />
+        </div>
 
-      <div className={styles.inputGroup}>
-        <label>Current weight *</label>
-        <input
-          type="number"
-          name="currentWeight"
-          value={formData.currentWeight}
-          onChange={handleChange}
-          required
-        />
-      </div>
+        <div className={styles.inputGroup}>
+          <label>Age *</label>
+          <input
+            type="number"
+            name="age"
+            value={formData.age}
+            onChange={handleChange}
+            required
+          />
+        </div>
 
-      <div className={styles.inputGroup}>
-        <label>Desired weight *</label>
-        <input
-          type="number"
-          name="desiredWeight"
-          value={formData.desiredWeight}
-          onChange={handleChange}
-          required
-        />
-      </div>
+        <div className={styles.radioGroup}>
+          <label>Blood type *</label>
+          <div className={styles.radios}>
+            {[1, 2, 3, 4].map((num) => (
+              <label key={num} className={styles.radioItem}>
+                <input
+                  type="radio"
+                  name="bloodType"
+                  value={num}
+                  checked={formData.bloodType === String(num)}
+                  onChange={handleChange}
+                />
+                <span>{num}</span>
+              </label>
+            ))}
+          </div>
+        </div>
 
-      <div className={styles.radioGroup}>
-        <label>Blood type *</label>
-        <div className={styles.radios}>
-          {[1, 2, 3, 4].map((num) => (
-            <label key={num} className={styles.radioItem}>
-              <input
-                type="radio"
-                name="bloodType"
-                value={num}
-                checked={formData.bloodType === String(num)}
-                onChange={handleChange}
-              />
-              <span>{num}</span>
-            </label>
-          ))}
+        <div className={styles.inputGroup}>
+          <label>Current weight *</label>
+          <input
+            type="number"
+            name="currentWeight"
+            value={formData.currentWeight}
+            onChange={handleChange}
+            required
+          />
         </div>
       </div>
 
