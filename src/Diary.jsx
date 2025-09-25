@@ -1,3 +1,4 @@
+import { useState } from "react";
 import styles from "./Diary.module.css";
 import logo from "./assets/logo.png";
 
@@ -8,9 +9,13 @@ export default function Diary({
   onBack,
   onExit,
   onMenuClick,
-  onAddClick,
+  onAddClick, // MOBİL modal akışı için (FAB)
+  onAdd, // TABLET/DESKTOP inline ekleme için YENİ
   onDelete,
 }) {
+  const [nameInput, setNameInput] = useState("");
+  const [gramsInput, setGramsInput] = useState("");
+
   const fmtDate = (d) => {
     const dd = new Date(d);
     const day = String(dd.getDate()).padStart(2, "0");
@@ -31,17 +36,46 @@ export default function Diary({
   const left = Math.max(dailyRate - consumed, 0);
   const percent = dailyRate > 0 ? Math.round((consumed / dailyRate) * 100) : 0;
 
+  // TABLET/DESKTOP: Aynı sayfada ekle
+  const addInline = () => {
+    const name = nameInput.trim();
+    const gramsNum = parseFloat(String(gramsInput).replace(",", "."));
+    if (!name || isNaN(gramsNum) || gramsNum <= 0) return;
+
+    onAdd?.({ name, grams: gramsNum }); // parent ürün listesine ekler
+
+    setNameInput("");
+    setGramsInput("");
+  };
+
+  const handleInlineKey = (e) => {
+    if (e.key === "Enter") {
+      e.preventDefault();
+      addInline();
+    }
+  };
+
   return (
     <div className={styles.DiaryPage}>
+      {/* Brand bar */}
       <div className={styles.DiaryBrandBar}>
         <img src={logo} alt="SlimMom" className={styles.DiaryBrandLogo} />
+        <div className={styles.DiaryNavDividerHeader}>
+          <div className={styles.DiaryTitle}>Nic</div>
+          <button
+            type="button"
+            className={styles.DiaryExitBtn}
+            onClick={onExit}
+          >
+            Exit
+          </button>
+        </div>
         <button
           type="button"
           className={styles.DiaryHamburger}
           aria-label="Menu"
           onClick={onMenuClick}
         >
-          {/* SVG hamburger icon */}
           <svg
             className={styles.DiaryHamburgerIcon}
             viewBox="0 0 24 24"
@@ -82,6 +116,7 @@ export default function Diary({
           </button>
         </div>
       </div>
+
       {/* Content */}
       <div className={styles.DiaryContent}>
         <h3>
@@ -90,6 +125,34 @@ export default function Diary({
             📅
           </span>
         </h3>
+
+        {/* TABLET & DESKTOP: Tarihin altındaki ekleme satırı (mobilde CSS ile gizli) */}
+        <div className={styles.AddRow}>
+          <input
+            type="text"
+            className={styles.AddName}
+            placeholder="Enter product name"
+            value={nameInput}
+            onChange={(e) => setNameInput(e.target.value)}
+            onKeyDown={handleInlineKey}
+          />
+          <input
+            type="text"
+            className={styles.AddGrams}
+            placeholder="Grams"
+            value={gramsInput}
+            onChange={(e) => setGramsInput(e.target.value)}
+            onKeyDown={handleInlineKey}
+          />
+          <button
+            type="button"
+            className={styles.AddBtn}
+            aria-label="Add"
+            onClick={addInline}
+          >
+            +
+          </button>
+        </div>
 
         <ul className={styles.DiaryList}>
           {products.map((p, i) => (
@@ -113,7 +176,7 @@ export default function Diary({
         </ul>
       </div>
 
-      {/*Floating Add Button*/}
+      {/* MOBİL: Floating + (tablet/desktop’ta CSS ile display:none) */}
       <div className={styles.DiaryFabDiv}>
         <button
           type="button"
@@ -124,27 +187,36 @@ export default function Diary({
           +
         </button>
       </div>
-      {/* Summary*/}
+
+      {/* Summary */}
       <div className={styles.DiarySummary}>
-        <h4>Summary for {fmtDate(date)}</h4>
-
-        <div className={styles.DiarySummaryGrid}>
-          <span className={styles.DiarySummaryLabel}>Left</span>
-          <span className={styles.DiarySummaryValue}>{left} kcal</span>
-
-          <span className={styles.DiarySummaryLabel}>Consumed</span>
-          <span className={styles.DiarySummaryValue}>{consumed} kcal</span>
-
-          <span className={styles.DiarySummaryLabel}>Daily rate</span>
-          <span className={styles.DiarySummaryValue}>{dailyRate} kcal</span>
-
-          <span className={styles.DiarySummaryLabel}>n% of normal</span>
-          <span className={styles.DiarySummaryValue}>{percent}%</span>
+        {/* SOL sütun */}
+        <div className={styles.SummaryBox}>
+          <h4>Summary for {fmtDate(date)}</h4>
+          <ul className={styles.SummaryList}>
+            <li>
+              <span>Left</span>
+              <span>{left} kcal</span>
+            </li>
+            <li>
+              <span>Consumed</span>
+              <span>{consumed} kcal</span>
+            </li>
+            <li>
+              <span>Daily rate</span>
+              <span>{dailyRate} kcal</span>
+            </li>
+            <li>
+              <span>n% of normal</span>
+              <span>{percent}%</span>
+            </li>
+          </ul>
         </div>
 
-        <div style={{ marginTop: 16 }}>
+        {/* SAĞ sütun */}
+        <div className={styles.FoodBox}>
           <h4>Food not recommended</h4>
-          <ul style={{ margin: 0, paddingLeft: 18 }}>
+          <ul>
             <li>Flour products</li>
             <li>Milk</li>
             <li>Read meat</li>

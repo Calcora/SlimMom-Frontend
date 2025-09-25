@@ -33,7 +33,7 @@
   display: grid;
   place-items: center;
   cursor: pointer;
-  color: #111827;         
+  color: #111827;
 }
 
 .DiaryHamburgerIcon {
@@ -42,9 +42,12 @@
 }
 
 /* (İsteğe bağlı) hover/active durumları */
-.DiaryHamburger:hover { color: #374151; }
-.DiaryHamburger:active { transform: scale(0.96); }
-
+.DiaryHamburger:hover {
+  color: #374151;
+}
+.DiaryHamburger:active {
+  transform: scale(0.96);
+}
 
 /* Header Navbar */
 .DiaryHeader {
@@ -188,49 +191,144 @@
 
 /* Summary */
 .DiarySummary {
-  background: #eef1f5;
+  background: #f9fafb;
+  margin: 16px;
   padding: 16px;
-  color: #6b7280;
 }
 
-.DiarySummary h4 {
-  margin: 0 0 12px;
-  color: #111827;
-  font-size: 14px;
-  font-weight: 800;
+/* Summary list */
+.SummaryList {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+.SummaryList li {
+  display: flex;
+  justify-content: space-between;
+  padding: 4px 0;
 }
 
-.DiarySummaryGrid {
-  display: grid;
-  grid-template-columns: 1fr auto;
-  row-gap: 8px;
+.FoodBox ul {
+  padding-left: 0;
+  margin-left: 0;
 }
 
-.DiarySummaryLabel {
-  color: #6b7280;
-}
-.DiarySummaryValue {
-  color: #9ca3af;
+.FoodBox ul li {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  text-align: left;
 }
 
-/* Tablet and Desktop */
+.AddRow {
+  display: none;
+  gap: 12px;
+  margin: 12px 0 20px;
+  align-items: center;
+}
+.DiaryNavDividerHeader{
+  display: none;
+}
+/* === Tablet ve üstü (768px+) === */
 @media (min-width: 768px) {
-  .DiaryBrandBar,
-  .DiaryHeader,
-  .DiaryContent,
-  .DiarySummary {
-    max-width: 520px;
-    margin: 0 auto;
+  /* Tarihin altındaki inline add satırı görünür */
+  .AddRow {
+    display: grid;
+    grid-template-columns: 1fr 180px 48px;
+    gap: 12px;
+    margin: 12px 0 20px;
+    align-items: center;
+  }
+  .AddName,
+  .AddGrams {
+    height: 44px;
+    padding: 0 12px;
+    border: none;
+    border-bottom: 1px solid #d1d5db;
+    font-size: 14px;
+    background: #fff;
+  }
+  .AddGrams {
+    text-align: right;
+  }
+  .AddBtn {
+    width: 44px;
+    height: 44px;
+    border: none;
+    border-radius: 50%;
+    background: #ff6b08;
+    color: #fff;
+    font-size: 22px;
+    cursor: pointer;
+    display: grid;
+    place-items: center;
   }
 
-  .DiaryContent {
-    border-left: 1px solid #eef1f5;
-    border-right: 1px solid #eef1f5;
+  /* Tablet/desktop’ta FAB gizle */
+  .DiaryFabDiv {
+    display: none;
   }
 
   .DiarySummary {
-    border: 1px solid #eef1f5;
-    border-top: none;
-    border-radius: 0 0 8px 8px;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 100px;
+  }
+  .SummaryBox h4,
+  .FoodBox h4 {
+    margin-top: 0;
+  }
+  .FoodBox ul {
+    margin: 0;
+    padding-left: 18px;
+    color: #6b7280;
+  }
+  .DiaryBackBtn {
+    display: none;
+  }
+  .DiaryHeader {
+    display: none;
+  }
+
+  .DiaryBrandBar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  .DiaryNavDividerHeader {
+    display: flex;
+    align-items: center;
+    margin-right: 10px; /* hamburger’in soluna iter */
+    margin-left: auto;  /* logodan biraz boşluk bırakır */
+    gap: 12px; /* title ve exit butonu arası */
+  }
+
+  .DiaryHamburger {
+    order: 2; /* hamburger en sağda kalır */
+  }
+}
+
+/* === Desktop (1200px+) === */
+@media (min-width: 1200px) {
+  .AddRow {
+    grid-template-columns: 1fr 220px 52px;
+    margin: 16px 0 24px;
+  }
+  .AddName,
+  .AddGrams {
+    height: 48px;
+    font-size: 15px;
+  }
+  .AddBtn {
+    width: 48px;
+    height: 48px;
+    font-size: 24px;
+  }
+  .DiaryBackBtn {
+    display: none;
+  }
+  .DiaryHeader {
+    display: none;
   }
 }

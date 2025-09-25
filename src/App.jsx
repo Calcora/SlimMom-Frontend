@@ -8,21 +8,17 @@ export default function App() {
   const [date, setDate] = useState(new Date());
   const dailyRate = 2800;
 
-  const handleAddClick = () => setView("add");
-
+  const handleAddClick = () => setView("add"); // MOBİL: FAB → modal
 
   const handleAdd = (item) => {
-    
-    setProducts((prev) => [...prev, item]);
-    setView("diary");
+    setProducts((prev) => [...prev, item]); // inline veya modal fark etmez
+    setView("diary"); // inline'da zaten diary'deyiz, modal sonrası geri döner
   };
-
 
   const handleDelete = (index) => {
     setProducts((prev) => prev.filter((_, i) => i !== index));
   };
 
-  
   const handleBack = () => setView("diary");
   const handleExit = () => setView("diary");
   const handleMenuClick = () => {
@@ -37,7 +33,8 @@ export default function App() {
       onBack={handleBack}
       onExit={handleExit}
       onMenuClick={handleMenuClick}
-      onAddClick={handleAddClick}
+      onAddClick={handleAddClick} // MOBİL FAB
+      onAdd={handleAdd} // TABLET/DESKTOP inline ekleme
       onDelete={handleDelete}
     />
   ) : (
@@ -46,7 +43,7 @@ export default function App() {
       onMenuClick={handleMenuClick}
       onBack={() => setView("diary")}
       onExit={() => setView("diary")}
-      onAdd={handleAdd}
+      onAdd={handleAdd} // MODAL’dan ekleme
       pending={false}
     />
   );
