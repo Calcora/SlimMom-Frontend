@@ -1,9 +1,16 @@
+import { useNavigate } from 'react-router-dom';
 import mobilLogo from "./assets/logo.png";
 import tabletLogo from "./assets/logo.png";
 
 const Logo = ({ className }) => {
+  const navigate = useNavigate();
+
+  const handleClick = () => {
+    navigate('/diary');
+  };
+
   return (
-    <picture>
+    <picture onClick={handleClick} style={{ cursor: 'pointer' }}>
       {/* 1200px+ için */}
       <source
         media="(min-width: 1200px)"

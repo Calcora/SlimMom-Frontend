@@ -1,0 +1,36 @@
+.content {
+  padding: 1.5rem;
+  background: #264061;
+  color: white;
+  text-align: center;
+  font-family: Verdana, sans-serif;
+}
+
+.calories {
+  font-size: 24px;
+  font-weight: bold;
+  color: #f47c2e;
+  margin: 1rem 0;
+}
+
+/* Tablet */
+@media (min-width: 768px) {
+  .content {
+    padding: 2rem;
+  }
+
+  .calories {
+    font-size: 28px;
+  }
+}
+
+/* Desktop */
+@media (min-width: 1024px) {
+  .content {
+    padding: 2.5rem;
+  }
+
+  .calories {
+    font-size: 32px;
+  }
+}
