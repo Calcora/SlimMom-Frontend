@@ -2,14 +2,13 @@ import "./App.css";
 import Login from "./Login";
 import MainPage from "./MainPage/MainPage";
 import Register from "./Registration";
+import CalculatorPage from "./CalculatorPage";
 
 function App() {
   return (
     <>
-      <MainPage />
-      <Login />
-      <Register />
-    </>
+      <CalculatorPage />   
+         </>
   );
 }
 

@@ -1,0 +1,113 @@
+.overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+}
+
+.modal {
+  background: #FFFFFF;
+  border-radius: 8px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+  width: 320px;
+  height: 568px;
+  overflow-y: auto;
+  opacity: 1;
+  transform: rotate(0deg);
+  position: relative;
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem 1.5rem;
+  background-color: #FFFFFF;
+  min-height: 80px;
+  position: relative;
+}
+
+.logo {
+  width: 159.9676055908203px;
+  height: 44px;
+  opacity: 1;
+}
+
+.modalSiteTitle {
+  margin: 0;
+  font-size: 1.5rem;
+  font-weight: bold;
+  color: #333;
+}
+
+.title {
+  margin: 0;
+  font-size: 1.25rem;
+  font-weight: 600;
+  color: #333;
+}
+
+.closeButton {
+  background: none;
+  border: none;
+  font-size: 1.5rem;
+  cursor: pointer;
+  color: #666;
+  padding: 0;
+  width: 2rem;
+  height: 2rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 4px;
+  transition: background-color 0.2s;
+}
+
+.closeButton:hover {
+  background-color: rgba(255, 255, 255, 0.1);
+  color: white;
+}
+
+.content {
+  padding: 1.5rem;
+  background: #264061;
+  width: 320px;
+  height: 488px;
+}
+
+/* Tablet */
+@media (min-width: 768px) {
+  .modal {
+    max-width: 500px;
+  }
+}
+
+/* Masaüstü */
+@media (min-width: 1024px) {
+  .modal {
+    max-width: 600px;
+  }
+}
+
+/* Tablet */
+@media (min-width: 768px) and (max-width: 1023px) {
+  .modalLogoContainer {
+    position: relative;
+  }
+
+  .modalLogoContainer .logo {
+    position: static;
+    width: auto;
+    height: auto;
+  }
+
+  .modalSiteTitle {
+    display: block;
+  }
+}
