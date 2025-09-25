@@ -9,8 +9,8 @@ export default function Diary({
   onBack,
   onExit,
   onMenuClick,
-  onAddClick, // MOBİL modal akışı için (FAB)
-  onAdd, // TABLET/DESKTOP inline ekleme için YENİ
+  onAddClick, 
+  onAdd, 
   onDelete,
 }) {
   const [nameInput, setNameInput] = useState("");
@@ -36,13 +36,13 @@ export default function Diary({
   const left = Math.max(dailyRate - consumed, 0);
   const percent = dailyRate > 0 ? Math.round((consumed / dailyRate) * 100) : 0;
 
-  // TABLET/DESKTOP: Aynı sayfada ekle
+  // TABLET/DESKTOP
   const addInline = () => {
     const name = nameInput.trim();
     const gramsNum = parseFloat(String(gramsInput).replace(",", "."));
     if (!name || isNaN(gramsNum) || gramsNum <= 0) return;
 
-    onAdd?.({ name, grams: gramsNum }); // parent ürün listesine ekler
+    onAdd?.({ name, grams: gramsNum }); 
 
     setNameInput("");
     setGramsInput("");
@@ -176,7 +176,7 @@ export default function Diary({
         </ul>
       </div>
 
-      {/* MOBİL: Floating + (tablet/desktop’ta CSS ile display:none) */}
+      {/* MOBİL */}
       <div className={styles.DiaryFabDiv}>
         <button
           type="button"
