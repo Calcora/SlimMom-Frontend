@@ -41,7 +41,6 @@
   height: 22px;
 }
 
-/* (İsteğe bağlı) hover/active durumları */
 .DiaryHamburger:hover {
   color: #374151;
 }
@@ -95,7 +94,7 @@
   color: #374151;
 }
 
-/* ==== Content ==== */
+/* Content */
 .DiaryContent {
   background: #fff;
   padding: 16px;
@@ -229,9 +228,9 @@
 .DiaryNavDividerHeader{
   display: none;
 }
-/* === Tablet ve üstü (768px+) === */
+/*  Tablet ve üstü */
 @media (min-width: 768px) {
-  /* Tarihin altındaki inline add satırı görünür */
+ 
   .AddRow {
     display: grid;
     grid-template-columns: 1fr 180px 48px;
@@ -299,17 +298,17 @@
   .DiaryNavDividerHeader {
     display: flex;
     align-items: center;
-    margin-right: 10px; /* hamburger’in soluna iter */
-    margin-left: auto;  /* logodan biraz boşluk bırakır */
-    gap: 12px; /* title ve exit butonu arası */
+    margin-right: 10px; 
+    margin-left: auto;  
+    gap: 12px; 
   }
 
   .DiaryHamburger {
-    order: 2; /* hamburger en sağda kalır */
+    order: 2; 
   }
 }
 
-/* === Desktop (1200px+) === */
+/*  Desktop  */
 @media (min-width: 1200px) {
   .AddRow {
     grid-template-columns: 1fr 220px 52px;

@@ -126,7 +126,7 @@ export default function Diary({
           </span>
         </h3>
 
-        {/* TABLET & DESKTOP: Tarihin altındaki ekleme satırı (mobilde CSS ile gizli) */}
+        {/* TABLET & DESKTOP */}
         <div className={styles.AddRow}>
           <input
             type="text"
