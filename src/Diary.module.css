@@ -250,26 +250,113 @@
 }
 
 /* Takvim ikon butonu */
+/* ---- Takvim ikon butonu (gri ikon) ---- */
 .CalendarIconBtn {
   margin-left: 8px;
   border: none;
   background: transparent;
   cursor: pointer;
-  font-size: 20px;
-  line-height: 1;
   display: inline-flex;
   align-items: center;
-
+  padding: 4px;
 }
 
-/* Datepicker popper üstte kalsın */
+.CalendarIcon {
+  color: #6b7280;            /* gri */
+  transition: color 0.2s ease;
+}
+.CalendarIconBtn:hover .CalendarIcon {
+  color: #374151;            /* hover'da koyu gri */
+}
+
+/* Datepicker popper'ın her şeyin üstünde kalması için */
 .react-datepicker-popper {
-  z-index: 10000; /* header/panel üstünde */
+  z-index: 10000;
 }
 
-/* (İsteğe bağlı) input stili kapatma */
+/* Custom input kullandığımız için varsayılan input görünmesin */
 .react-datepicker__input-container input {
-  display: none; /* customInput kullandığımız için gereksiz */
+  display: none;
+}
+
+/* ---- Gray theme for react-datepicker ---- */
+:root {
+  --dp-bg: #f5f6f7;
+  --dp-surface: #ffffff;
+  --dp-border: #e5e7eb;
+  --dp-text: #b2b2b2;
+  --dp-muted: #b9b8b8;
+  --dp-accent: #b0b0b0;
+  --dp-accent-strong: #fbfbfb;
+}
+
+.react-datepicker {
+  background: var(--dp-surface);
+  border: 1px solid var(--dp-border);
+  box-shadow: 0 8px 24px rgba(179, 176, 176, 0.08);
+  color: var(--dp-text);
+  border-radius: 10px;
+  overflow: hidden;
+}
+
+.react-datepicker__header {
+  background: var(--dp-bg);
+  border-bottom: 1px solid var(--dp-border);
+}
+.react-datepicker__current-month,
+.react-datepicker-time__header,
+.react-datepicker-year-header {
+  color: var(--dp-text);
+  font-weight: 600;
+}
+
+.react-datepicker__day-name {
+  color: var(--dp-muted);
+}
+
+.react-datepicker__day {
+  color: var(--dp-text);
+  outline: none;
+}
+.react-datepicker__day:hover {
+  background: #eef1f4;
+  border-radius: 6px;
+}
+
+.react-datepicker__day--today {
+  border: 1px solid var(--dp-border);
+  border-radius: 6px;
+}
+
+.react-datepicker__day--selected,
+.react-datepicker__day--keyboard-selected,
+.react-datepicker__day--in-range,
+.react-datepicker__day--in-selecting-range,
+.react-datepicker__day--range-start,
+.react-datepicker__day--range-end {
+  background: var(--dp-accent);
+  color: #fff;
+  border-radius: 6px;
+}
+.react-datepicker__day--selected:hover,
+.react-datepicker__day--keyboard-selected:hover {
+  background: var(--dp-accent-strong);
+}
+
+.react-datepicker__day--disabled {
+  color: #c9cdd2;
+  cursor: not-allowed;
+}
+
+.react-datepicker__navigation-icon::before {
+  border-color: var(--dp-muted);
+}
+.react-datepicker__navigation:hover *::before {
+  border-color: var(--dp-text);
+}
+
+.react-datepicker__triangle {
+  display: none;
 }
 
 /*  Tablet ve üstü */

@@ -14,13 +14,14 @@ export default function Diary({
   onAddClick,
   onAdd,
   onDelete,
-  onDateChange, // <- İSTEĞE BAĞLI: tarihi parent'ta yönetmek için
+  onDateChange, // isteğe bağlı: tarihi parent'ta yönetmek için
 }) {
-  // ----- DATE (controlled or uncontrolled) -----
+  // ---- Tarih (controlled / uncontrolled) ----
   const [localDate, setLocalDate] = useState(date);
   useEffect(() => {
     setLocalDate(date);
   }, [date]);
+
   const currentDate = onDateChange ? date : localDate;
 
   const handleDatePick = (d) => {
@@ -29,7 +30,7 @@ export default function Diary({
     else setLocalDate(d);
   };
 
-  // ----- CALENDAR ICON as custom input -----
+  // ---- Sadece ikon görünen custom input ----
   const CalendarIconBtn = forwardRef(function CalendarIconBtn(
     { onClick },
     ref
@@ -42,8 +43,20 @@ export default function Diary({
         onClick={onClick}
         ref={ref}
       >
-        {/* İstersen SVG ikon da koyabilirsin */}
-        📅
+        {/* Gri renge boyanan SVG ikon */}
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          viewBox="0 0 24 24"
+          width="22"
+          height="22"
+          className={styles.CalendarIcon}
+          aria-hidden="true"
+        >
+          <path
+            d="M7 10h5v5H7v-5zm10-6h-1V2h-2v2H10V2H8v2H7c-1.1 0-1.99.9-1.99 2L5 20c0 1.1.89 2 1.99 2H19c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 16H7V9h12v11z"
+            fill="currentColor"
+          />
+        </svg>
       </button>
     );
   });
@@ -68,7 +81,7 @@ export default function Diary({
   const left = Math.max(dailyRate - consumed, 0);
   const percent = dailyRate > 0 ? Math.round((consumed / dailyRate) * 100) : 0;
 
-  // TABLET/DESKTOP inline ekleme
+  // ---- Tablet/Desktop inline ekleme ----
   const [nameInput, setNameInput] = useState("");
   const [gramsInput, setGramsInput] = useState("");
 
@@ -154,7 +167,7 @@ export default function Diary({
       <div className={styles.DiaryContent}>
         <h3 className={styles.DiaryDate}>
           {fmtDate(currentDate)}
-          {/* Sadece ikon butona basınca takvim açılır */}
+          {/* Sadece ikon görünüyor; tıklayınca takvim açılır */}
           <DatePicker
             selected={currentDate}
             onChange={handleDatePick}
@@ -228,7 +241,7 @@ export default function Diary({
         </button>
       </div>
 
-      {/* Summary (sağ panel / alt kısım) */}
+      {/* Summary */}
       <div className={styles.DiarySummary}>
         <div className={styles.DiaryNavDividerHeaderSummary}>
           <div className={styles.DiaryTitle}>Nic</div>
@@ -241,6 +254,7 @@ export default function Diary({
           </button>
         </div>
 
+        {/* SOL sütun */}
         <div className={styles.SummaryBox}>
           <h4>Summary for {fmtDate(currentDate)}</h4>
           <ul className={styles.SummaryList}>
@@ -263,6 +277,7 @@ export default function Diary({
           </ul>
         </div>
 
+        {/* SAĞ sütun */}
         <div className={styles.FoodBox}>
           <h4>Food not recommended</h4>
           <ul>
