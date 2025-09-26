@@ -121,7 +121,7 @@ export default function Diary({
       <div className={styles.DiaryContent}>
         <h3>
           {fmtDate(date)}{" "}
-          <span role="img" aria-label="calendar">
+          <span role="img" aria-label="calendar" className={styles.calendar}>
             📅
           </span>
         </h3>
@@ -161,8 +161,10 @@ export default function Diary({
               <span className={styles.DiaryItemGrams}>
                 {typeof p.grams === "number" ? p.grams : "--"} g
               </span>
-              <span className={styles.DiaryItemKcal}>{itemKcal(p)}</span>
-              <span className={styles.DiaryItemKcalUnit}>kcal</span>
+              <div className={styles.DiaryItemKcalBox}>
+                <span className={styles.DiaryItemKcal}>{itemKcal(p)}</span>
+                <span className={styles.DiaryItemKcalUnit}>kcal</span>
+              </div>
               <button
                 type="button"
                 className={styles.DiaryDeleteBtn}

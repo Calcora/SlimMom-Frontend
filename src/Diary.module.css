@@ -3,7 +3,7 @@
   min-height: 100vh;
   display: flex;
   flex-direction: column;
-  background: #f7f9fb;
+ 
   font-family: Verdana, Geneva, sans-serif;
 }
 
@@ -73,6 +73,7 @@
   gap: 12px;
 }
 
+
 .DiaryTitle {
   font-weight: 700;
   font-size: 15px;
@@ -98,7 +99,7 @@
 .DiaryContent {
   background: #fff;
   padding: 16px;
-  border-bottom: 1px solid #eef1f5;
+
 }
 
 .DiaryContent h3 {
@@ -113,35 +114,47 @@
 
 /*  List*/
 .DiaryList {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
   list-style: none;
   margin: 0;
   padding: 0;
 }
 
 .DiaryItem {
-  font-size: 11px;
+  font-size: 12px;
   font-weight: 500;
   display: grid;
-  grid-template-columns: 1fr auto 56px auto 24px;
+  grid-template-columns: 1fr 60px 60px 24px;
   align-items: center;
   gap: 8px;
   padding: 10px 0;
   border-bottom: 1px solid #edf2f7;
 }
 
-.DiaryItem:last-child {
-  border-bottom: none;
-}
-
 .DiaryItemName {
   color: #111827;
+  font-size: 12px;
 }
+
 .DiaryItemGrams {
   color: #6b7280;
+  text-align: right; 
+   font-size: 12px;
 }
+
+.DiaryItemKcalBox {
+  display: flex;
+  justify-content: flex-end; 
+  align-items: baseline;
+}
+
 .DiaryItemKcal {
   color: #6b7280;
+  font-size: 12px;
 }
+
 .DiaryItemKcalUnit {
   font-size: 12px;
   color: #9ca3af;
@@ -149,27 +162,23 @@
 }
 
 .DiaryDeleteBtn {
-  width: 24px;
-  height: 24px;
-  border: none;
   background: transparent;
+  border: none;
   color: #9ca3af;
+  font-size: 20px;
   cursor: pointer;
-  border-radius: 50%;
-  line-height: 1;
+  
 }
-.DiaryDeleteBtn:hover {
-  background: #f3f4f6;
-  color: #6b7280;
-}
+
+
 
 /* Floating Add Button*/
 .DiaryFabDiv {
   display: flex;
   justify-content: center;
   align-items: center;
-  margin-top: 60px;
-  margin-bottom: 60px;
+  margin-top: 50px;
+  margin-bottom: 50px;
 }
 .DiaryFab {
   width: 48px;
@@ -190,9 +199,9 @@
 
 /* Summary */
 .DiarySummary {
-  background: #f9fafb;
-  margin: 16px;
-  padding: 16px;
+  background: #F0F1F3;
+  padding: 20px;
+
 }
 
 /* Summary list */
@@ -204,7 +213,7 @@
 .SummaryList li {
   display: flex;
   justify-content: space-between;
-  padding: 4px 0;
+  padding: 5px 0;
 }
 
 .FoodBox ul {
@@ -225,12 +234,11 @@
   margin: 12px 0 20px;
   align-items: center;
 }
-.DiaryNavDividerHeader{
+.DiaryNavDividerHeader {
   display: none;
 }
 /*  Tablet ve üstü */
 @media (min-width: 768px) {
- 
   .AddRow {
     display: grid;
     grid-template-columns: 1fr 180px 48px;
@@ -298,13 +306,16 @@
   .DiaryNavDividerHeader {
     display: flex;
     align-items: center;
-    margin-right: 10px; 
-    margin-left: auto;  
-    gap: 12px; 
+    margin-right: 10px;
+    margin-left: auto;
+    gap: 12px;
   }
 
   .DiaryHamburger {
-    order: 2; 
+    order: 2;
+  }
+  .DiaryItemName {
+    font-size: 14px;
   }
 }
 
