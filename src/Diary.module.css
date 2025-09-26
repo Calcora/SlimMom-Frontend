@@ -248,6 +248,30 @@
 .DiaryNavDividerHeaderSummary {
   display: none;
 }
+
+/* Takvim ikon butonu */
+.CalendarIconBtn {
+  margin-left: 8px;
+  border: none;
+  background: transparent;
+  cursor: pointer;
+  font-size: 20px;
+  line-height: 1;
+  display: inline-flex;
+  align-items: center;
+
+}
+
+/* Datepicker popper üstte kalsın */
+.react-datepicker-popper {
+  z-index: 10000; /* header/panel üstünde */
+}
+
+/* (İsteğe bağlı) input stili kapatma */
+.react-datepicker__input-container input {
+  display: none; /* customInput kullandığımız için gereksiz */
+}
+
 /*  Tablet ve üstü */
 @media (min-width: 768px) {
   .AddRow {

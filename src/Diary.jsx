@@ -1,6 +1,8 @@
-import { useState } from "react";
+import { useEffect, useState, forwardRef } from "react";
 import styles from "./Diary.module.css";
 import logo from "./assets/logo.png";
+import DatePicker from "react-datepicker";
+import "react-datepicker/dist/react-datepicker.css";
 
 export default function Diary({
   products = [],
@@ -9,12 +11,42 @@ export default function Diary({
   onBack,
   onExit,
   onMenuClick,
-  onAddClick, 
-  onAdd, 
+  onAddClick,
+  onAdd,
   onDelete,
+  onDateChange, // <- İSTEĞE BAĞLI: tarihi parent'ta yönetmek için
 }) {
-  const [nameInput, setNameInput] = useState("");
-  const [gramsInput, setGramsInput] = useState("");
+  // ----- DATE (controlled or uncontrolled) -----
+  const [localDate, setLocalDate] = useState(date);
+  useEffect(() => {
+    setLocalDate(date);
+  }, [date]);
+  const currentDate = onDateChange ? date : localDate;
+
+  const handleDatePick = (d) => {
+    if (!d) return;
+    if (typeof onDateChange === "function") onDateChange(d);
+    else setLocalDate(d);
+  };
+
+  // ----- CALENDAR ICON as custom input -----
+  const CalendarIconBtn = forwardRef(function CalendarIconBtn(
+    { onClick },
+    ref
+  ) {
+    return (
+      <button
+        type="button"
+        className={styles.CalendarIconBtn}
+        aria-label="Pick a date"
+        onClick={onClick}
+        ref={ref}
+      >
+        {/* İstersen SVG ikon da koyabilirsin */}
+        📅
+      </button>
+    );
+  });
 
   const fmtDate = (d) => {
     const dd = new Date(d);
@@ -36,14 +68,15 @@ export default function Diary({
   const left = Math.max(dailyRate - consumed, 0);
   const percent = dailyRate > 0 ? Math.round((consumed / dailyRate) * 100) : 0;
 
-  // TABLET/DESKTOP
+  // TABLET/DESKTOP inline ekleme
+  const [nameInput, setNameInput] = useState("");
+  const [gramsInput, setGramsInput] = useState("");
+
   const addInline = () => {
     const name = nameInput.trim();
     const gramsNum = parseFloat(String(gramsInput).replace(",", "."));
     if (!name || isNaN(gramsNum) || gramsNum <= 0) return;
-
-    onAdd?.({ name, grams: gramsNum }); 
-
+    onAdd?.({ name, grams: gramsNum });
     setNameInput("");
     setGramsInput("");
   };
@@ -120,13 +153,18 @@ export default function Diary({
       {/* Content */}
       <div className={styles.DiaryContent}>
         <h3 className={styles.DiaryDate}>
-          {fmtDate(date)}{" "}
-          <span role="img" aria-label="calendar" className={styles.calendar}>
-            📅
-          </span>
+          {fmtDate(currentDate)}
+          {/* Sadece ikon butona basınca takvim açılır */}
+          <DatePicker
+            selected={currentDate}
+            onChange={handleDatePick}
+            customInput={<CalendarIconBtn />}
+            popperPlacement="bottom-start"
+            showPopperArrow
+          />
         </h3>
 
-        {/* TABLET & DESKTOP */}
+        {/* TABLET & DESKTOP inline add */}
         <div className={styles.AddRow}>
           <input
             type="text"
@@ -178,7 +216,7 @@ export default function Diary({
         </ul>
       </div>
 
-      {/* MOBİL */}
+      {/* MOBİL FAB */}
       <div className={styles.DiaryFabDiv}>
         <button
           type="button"
@@ -190,7 +228,7 @@ export default function Diary({
         </button>
       </div>
 
-      {/* Summary */}
+      {/* Summary (sağ panel / alt kısım) */}
       <div className={styles.DiarySummary}>
         <div className={styles.DiaryNavDividerHeaderSummary}>
           <div className={styles.DiaryTitle}>Nic</div>
@@ -202,9 +240,9 @@ export default function Diary({
             Exit
           </button>
         </div>
-        {/* SOL sütun */}
+
         <div className={styles.SummaryBox}>
-          <h4>Summary for {fmtDate(date)}</h4>
+          <h4>Summary for {fmtDate(currentDate)}</h4>
           <ul className={styles.SummaryList}>
             <li>
               <span>Left</span>
@@ -225,7 +263,6 @@ export default function Diary({
           </ul>
         </div>
 
-        {/* SAĞ sütun */}
         <div className={styles.FoodBox}>
           <h4>Food not recommended</h4>
           <ul>
