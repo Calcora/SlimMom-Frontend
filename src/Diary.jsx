@@ -119,7 +119,7 @@ export default function Diary({
 
       {/* Content */}
       <div className={styles.DiaryContent}>
-        <h3>
+        <h3 className={styles.DiaryDate}>
           {fmtDate(date)}{" "}
           <span role="img" aria-label="calendar" className={styles.calendar}>
             📅
