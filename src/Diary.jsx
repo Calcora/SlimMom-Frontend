@@ -192,6 +192,16 @@ export default function Diary({
 
       {/* Summary */}
       <div className={styles.DiarySummary}>
+        <div className={styles.DiaryNavDividerHeaderSummary}>
+          <div className={styles.DiaryTitle}>Nic</div>
+          <button
+            type="button"
+            className={styles.DiaryExitBtn}
+            onClick={onExit}
+          >
+            Exit
+          </button>
+        </div>
         {/* SOL sütun */}
         <div className={styles.SummaryBox}>
           <h4>Summary for {fmtDate(date)}</h4>
