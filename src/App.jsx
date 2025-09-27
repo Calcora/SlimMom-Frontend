@@ -11,12 +11,7 @@ function ProtectedRoute({ isAuth, children }) {
   return children;
 }
 
-export default function App() {
-  const navigate = useNavigate(); 
-  const [isAuth, setIsAuth] = useState(false);
-import Diary from "./Diary";
-import GramCalc from "./GramCalc";
-import MainPage from "./MainPage/MainPage"; 
+ 
 
 export default function App() {
   const [view, setView] = useState("main"); 
