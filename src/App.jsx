@@ -12,6 +12,7 @@ function ProtectedRoute({ isAuth, children }) {
 }
 
  
+import MainPage from "./MainPage/MainPage"; 
 
 export default function App() {
   const [view, setView] = useState("main"); 
@@ -122,45 +123,4 @@ export default function App() {
     </Routes>
   );
 }
-  const handleBack = () => setView("diary");
-  const handleExit = () => setView("main"); 
-  const handleMenuClick = () => {
-    console.log("menu");
-  };
-
   
-  if (view === "main") {
-    return <MainPage />;
-  }
-
-  if (view === "diary") {
-    return (
-      <Diary
-        products={products}
-        date={date}
-        dailyRate={dailyRate}
-        onBack={handleBack}
-        onExit={handleExit}
-        onMenuClick={handleMenuClick}
-        onAddClick={handleAddClick}
-        onDelete={handleDelete}
-      />
-    );
-  }
-
-  if (view === "add") {
-    return (
-      <GramCalc
-        title="Nic"
-        onMenuClick={handleMenuClick}
-        onBack={() => setView("diary")}
-        onExit={() => setView("diary")}
-        onAdd={handleAdd}
-        pending={false}
-      />
-    );
-  }
-
-  // Default fallback to MainPage
-  return <MainPage />;
-}
