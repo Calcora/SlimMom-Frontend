@@ -17,24 +17,27 @@
   box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
   width: 320px;
   height: 568px;
-  overflow-y: auto;
   opacity: 1;
   transform: rotate(0deg);
   position: relative;
 }
 
 .header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 1rem 1.5rem;
-  background-color: #FFFFFF;
-  min-height: 80px;
   position: relative;
+  background-color: #FFFFFF;
+  height: 80px;
+  border-bottom: 2px solid #E0E0E0;
+}
+
+.userInfo {
+  display: none;
 }
 
 .logo {
-  width: 159.9676055908203px;
+  position: absolute;
+  left: 20px;
+  top: 20px;
+  width: 159.97px;
   height: 44px;
   opacity: 1;
 }
@@ -54,14 +57,17 @@
 }
 
 .closeButton {
+  position: absolute;
+  right: 20px;
+  top: 28px;
   background: none;
   border: none;
   font-size: 1.5rem;
   cursor: pointer;
-  color: #666;
+  color: #212121;
   padding: 0;
-  width: 2rem;
-  height: 2rem;
+  width: 24px;
+  height: 24px;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -74,17 +80,273 @@
   color: white;
 }
 
+.hamburger {
+  position: absolute;
+  left: 180px;
+  top: 28px;
+  background: none;
+  border: none;
+  font-size: 1.5rem;
+  cursor: pointer;
+  color: #212121;
+  padding: 0;
+  width: 24px;
+  height: 24px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 4px;
+  transition: background-color 0.2s;
+}
+
+.hamburger:hover {
+  background-color: rgba(255, 255, 255, 0.1);
+}
+
+.dropdown {
+  position: absolute;
+  top: 80px;
+  left: 20px;
+  background: #FFFFFF;
+  border: 1px solid #E0E0E0;
+  border-radius: 8px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+  z-index: 1001;
+  padding: 10px;
+  min-width: 150px;
+}
+
+.dropdown button {
+  display: block;
+  width: 100%;
+  background: none;
+  border: none;
+  padding: 8px 12px;
+  text-align: left;
+  cursor: pointer;
+  color: #212121;
+  font-size: 1rem;
+  border-radius: 4px;
+  transition: background-color 0.2s;
+}
+
+.dropdown button:hover {
+  background-color: #F5F5F5;
+}
+
+.dropdown {
+  position: absolute;
+  top: 80px;
+  left: 20px;
+  background: #FFFFFF;
+  border: 1px solid #E0E0E0;
+  border-radius: 8px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+  z-index: 1001;
+  padding: 10px;
+  min-width: 150px;
+}
+
+.dropdown button {
+  display: block;
+  width: 100%;
+  background: none;
+  border: none;
+  padding: 8px 12px;
+  text-align: left;
+  cursor: pointer;
+  color: #212121;
+  font-size: 1rem;
+  border-radius: 4px;
+  transition: background-color 0.2s;
+}
+
+.dropdown button:hover {
+  background-color: #F5F5F5;
+}
+
+.dropdown {
+  position: absolute;
+  top: 80px;
+  left: 20px;
+  background: #FFFFFF;
+  border: 1px solid #E0E0E0;
+  border-radius: 8px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+  z-index: 1001;
+  padding: 10px;
+  min-width: 150px;
+}
+
+.dropdown button {
+  display: block;
+  width: 100%;
+  background: none;
+  border: none;
+  padding: 8px 12px;
+  text-align: left;
+  cursor: pointer;
+  color: #212121;
+  font-size: 1rem;
+  border-radius: 4px;
+  transition: background-color 0.2s;
+}
+
+.dropdown button:hover {
+  background-color: #F5F5F5;
+}
+
 .content {
   padding: 1.5rem;
-  background: #264061;
   width: 320px;
   height: 488px;
+  background: #264061;
+  position: absolute;
+  top: 80px;
+  box-sizing: border-box;
+}
+
+.title {
+  position: absolute;
+  left: 20px;
+  top: 60px;
+  width: 280px;
+  height: 112px;
+  font-family: 'Verdana';
+  font-weight: 700;
+  font-size: 18px;
+  line-height: 100%;
+  letter-spacing: 4%;
+  text-align: center;
+  text-transform: uppercase;
+  color: #9B9FAA;
+  margin: 0;
+}
+
+.title div {
+  margin-bottom: 20px;
+}
+
+.title div:first-child {
+  color: #9B9FAA;
+}
+
+.title div:last-child {
+  color: #FFFFFF;
+}
+
+.title span {
+  font-family: 'Verdana';
+  font-weight: 700;
+  line-height: 100%;
+  letter-spacing: 4%;
+  text-align: center;
+  text-transform: uppercase;
 }
 
 /* Tablet */
-@media (min-width: 768px) {
+@media (min-width: 768px) and (max-width: 1023px) {
   .modal {
-    max-width: 500px;
+    width: 768px;
+    height: 1024px;
+  }
+
+  .content {
+    width: 768px;
+    height: 944px;
+    box-sizing: border-box;
+  }
+
+  .title {
+    left: 216px;
+    top: 100px;
+    width: 336px;
+    font-size: 24px;
+    line-height: 100%;
+    text-align: center;
+  }
+
+  .userInfo {
+    display: flex;
+    position: absolute;
+    left: 480px;
+    top: 23px;
+    width: 184px;
+    height: 32px;
+    background-color: #FFFFFF;
+    transform: rotate(0deg);
+    opacity: 1;
+  }
+
+  .userInfo span:first-child {
+    position: absolute;
+    left: 0px;
+    top: 11px;
+    width: 122px;
+    height: 17px;
+    font-family: 'Verdana';
+    font-weight: 700;
+    font-size: 14px;
+    line-height: 17px;
+    letter-spacing: 0.04em;
+    color: #212121;
+    text-align: left;
+  }
+
+  .userInfo span:last-child {
+    position: absolute;
+    left: 152px;
+    top: 11px;
+    width: 32px;
+    height: 17px;
+    font-family: 'Verdana';
+    font-weight: 700;
+    font-size: 14px;
+    line-height: 17px;
+    letter-spacing: 0.04em;
+    color: #9B9FAA;
+  }
+
+  .hamburger {
+    display: block;
+    position: absolute;
+    left: 400px;
+    top: 28px;
+    background: none;
+    border: none;
+    font-size: 1.5rem;
+    cursor: pointer;
+    color: #212121;
+    padding: 0;
+    width: 24px;
+    height: 24px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 4px;
+    transition: background-color 0.2s;
+  }
+
+  .hamburger:hover {
+    background-color: rgba(255, 255, 255, 0.1);
+  }
+
+  .verticalLine {
+    position: absolute;
+    left: 137px;
+    top: 0px;
+    width: 0px;
+    height: 32px;
+    border-left: 2px solid #000;
+  }
+
+  .userInfo button {
+    background: none;
+    border: none;
+    font: inherit;
+    color: inherit;
+    cursor: pointer;
+    padding: 0;
   }
 }
 
@@ -92,6 +354,11 @@
 @media (min-width: 1024px) {
   .modal {
     max-width: 600px;
+    height: 568px;
+  }
+
+  .content {
+    height: 488px;
   }
 }
 

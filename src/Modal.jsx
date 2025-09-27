@@ -1,8 +1,8 @@
-import { useEffect } from 'react';
+import React, { useEffect } from 'react';
 import logo from './assets/logo.png';
 import styles from './Modal.module.css';
 
-const Modal = ({ isOpen, onClose, children }) => {
+const Modal = ({ isOpen, onClose }) => {
   useEffect(() => {
     const handleEscape = (e) => {
       if (e.key === 'Escape') {
@@ -10,13 +10,21 @@ const Modal = ({ isOpen, onClose, children }) => {
       }
     };
 
+    const handleOverlayClick = (e) => {
+      if (e.target.classList.contains(styles.overlay)) {
+        onClose();
+      }
+    };
+
     if (isOpen) {
       document.addEventListener('keydown', handleEscape);
+      document.addEventListener('click', handleOverlayClick);
       document.body.style.overflow = 'hidden';
     }
 
     return () => {
       document.removeEventListener('keydown', handleEscape);
+      document.removeEventListener('click', handleOverlayClick);
       document.body.style.overflow = 'unset';
     };
   }, [isOpen, onClose]);
@@ -27,13 +35,21 @@ const Modal = ({ isOpen, onClose, children }) => {
     <div className={styles.overlay} onClick={onClose}>
       <div className={styles.modal} onClick={(e) => e.stopPropagation()}>
         <div className={styles.header}>
-          <img src={logo} alt="SlimMom" className={styles.logo} />
-          <button className={styles.closeButton} onClick={onClose}>
-            ×
-          </button>
-        </div>
+           <img src={logo} alt="SlimMom" className={styles.logo} />
+           <div className={styles.userInfo}>
+             <button>Nic</button>
+             <div className={styles.verticalLine}></div>
+             <span>Exit</span>
+           </div>
+           <button className={styles.closeButton} onClick={onClose}>
+             ×
+           </button>
+         </div>
         <div className={styles.content}>
-          {children}
+          <h1 className={styles.title}>
+            <div>Diary</div>
+            <div><span>Calculator</span></div>
+          </h1>
         </div>
       </div>
     </div>

@@ -1,13 +1,14 @@
 import { useState } from "react";
 import Diary from "./Diary";
 import GramCalc from "./GramCalc";
-import MainPage from "./MainPage/MainPage"; 
+import MainPage from "./MainPage/MainPage";
+import Modal from "./Modal";
 
 export default function App() {
   const [view, setView] = useState("main"); 
   const [products, setProducts] = useState([]);
-  const [date, setDate] = useState(new Date());
-  const [dailyRate, setDailyRate] = useState(2800);
+  const [date] = useState(new Date());
+  const [dailyRate] = useState(2800);
 
   const handleAddClick = () => setView("add");
 
@@ -23,12 +24,12 @@ export default function App() {
   const handleBack = () => setView("diary");
   const handleExit = () => setView("main"); 
   const handleMenuClick = () => {
-    console.log("menu");
+    setView("main");
   };
 
   
   if (view === "main") {
-    return <MainPage />;
+    return <Modal isOpen={true} onClose={() => setView("diary")} children={<div>Modal Content</div>} />;
   }
 
   if (view === "diary") {
