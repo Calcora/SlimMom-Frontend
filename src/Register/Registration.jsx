@@ -109,7 +109,7 @@ export default function Register({ onSubmit, onSwitchTab }) {
 
           return (
             <Form className={styles.registrationForm} noValidate>
-              <h2 className={styles.registrationTitle}>REGISTRATION</h2>
+              <h2 className={styles.registrationTitle}>REGISTER</h2>
 
               <label className={styles.registrationLabel} htmlFor="name">
                 Name *
