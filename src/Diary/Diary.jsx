@@ -4,6 +4,11 @@ import logo from "../assets/logo.png";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 
+import { Formik, Form, Field } from "formik";
+import * as Yup from "yup";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+
 export default function Diary({
   products = [],
   date = new Date(),
@@ -14,9 +19,9 @@ export default function Diary({
   onAddClick,
   onAdd,
   onDelete,
-  onDateChange, 
+  onDateChange,
 }) {
-  //Tarih
+  // Tarih (controlled/uncontrolled destekli)
   const [localDate, setLocalDate] = useState(date);
   useEffect(() => {
     setLocalDate(date);
@@ -30,6 +35,7 @@ export default function Diary({
     else setLocalDate(d);
   };
 
+  // Takvim ikon butonu
   const CalendarIconBtn = forwardRef(function CalendarIconBtn(
     { onClick },
     ref
@@ -78,29 +84,30 @@ export default function Diary({
   const consumed = products.reduce((sum, p) => sum + itemKcal(p), 0);
   const left = Math.max(dailyRate - consumed, 0);
   const percent = dailyRate > 0 ? Math.round((consumed / dailyRate) * 100) : 0;
-
-  //Tablet/Desktop inline ekleme
-  const [nameInput, setNameInput] = useState("");
-  const [gramsInput, setGramsInput] = useState("");
-
-  const addInline = () => {
-    const name = nameInput.trim();
-    const gramsNum = parseFloat(String(gramsInput).replace(",", "."));
-    if (!name || isNaN(gramsNum) || gramsNum <= 0) return;
-    onAdd?.({ name, grams: gramsNum });
-    setNameInput("");
-    setGramsInput("");
-  };
-
-  const handleInlineKey = (e) => {
-    if (e.key === "Enter") {
-      e.preventDefault();
-      addInline();
-    }
-  };
+  
+  const AddSchema = Yup.object({
+    name: Yup.string()
+      .trim()
+      .min(2, "Please enter at least 2 characters.")
+      .required("Please enter at least 2 characters."),
+    grams: Yup.number()
+      .transform((val, orig) => {
+        if (typeof orig === "string") {
+          const n = parseFloat(orig.replace(",", "."));
+          return Number.isNaN(n) ? val : n;
+        }
+        return val;
+      })
+      .typeError("Please enter a positive number.")
+      .positive("Please enter a positive number.")
+      .required("Please enter a positive number."),
+  });
 
   return (
     <div className={styles.DiaryPage}>
+      {/* Toast container */}
+      <ToastContainer position="top-center" autoClose={2500} />
+
       <div className={styles.DiaryBrandBar}>
         <img src={logo} alt="SlimMom" className={styles.DiaryBrandLogo} />
         <div className={styles.DiaryNavDividerHeader}>
@@ -170,36 +177,67 @@ export default function Diary({
             customInput={<CalendarIconBtn />}
             popperPlacement="bottom-start"
             showPopperArrow
+            calendarClassName={styles.GrayCalendar}
+            dayClassName={() => styles.GrayCalendarDay}
+            popperClassName={styles.GrayCalendarPopper}
           />
         </h3>
 
-        {/* TABLET & DESKTOP inline add */}
-        <div className={styles.AddRow}>
-          <input
-            type="text"
-            className={styles.AddName}
-            placeholder="Enter product name"
-            value={nameInput}
-            onChange={(e) => setNameInput(e.target.value)}
-            onKeyDown={handleInlineKey}
-          />
-          <input
-            type="text"
-            className={styles.AddGrams}
-            placeholder="Grams"
-            value={gramsInput}
-            onChange={(e) => setGramsInput(e.target.value)}
-            onKeyDown={handleInlineKey}
-          />
-          <button
-            type="button"
-            className={styles.AddBtn}
-            aria-label="Add"
-            onClick={addInline}
-          >
-            +
-          </button>
-        </div>
+        {/* TABLET & DESKTOP inline add (Formik + Toastify) */}
+        <Formik
+          initialValues={{ name: "", grams: "" }}
+          validationSchema={AddSchema}
+          onSubmit={(vals, { resetForm }) => {
+            const gramsNumber =
+              typeof vals.grams === "number"
+                ? vals.grams
+                : parseFloat(String(vals.grams).replace(",", "."));
+            onAdd?.({ name: vals.name.trim(), grams: gramsNumber });
+            resetForm();
+          }}
+          validateOnBlur
+          validateOnChange={false}
+        >
+          {({ validateForm, submitForm, isSubmitting }) => {
+            const handleAddClick = async () => {
+              const errs = await validateForm();
+              const keys = Object.keys(errs);
+              if (keys.length) {
+                const messages = keys.map((k) => errs[k]);
+                toast.error(messages.join(" • "));
+                return;
+              }
+              await submitForm();
+              toast.success("Added ✔");
+            };
+
+            return (
+              <Form className={styles.AddRow} noValidate>
+                <Field
+                  name="name"
+                  type="text"
+                  className={styles.AddName}
+                  placeholder="Enter product name"
+                />
+                <Field
+                  name="grams"
+                  type="text" // virgül desteği
+                  className={styles.AddGrams}
+                  placeholder="Grams"
+                />
+                <button
+                  type="button"
+                  className={styles.AddBtn}
+                  aria-label="Add"
+                  onClick={handleAddClick}
+                  disabled={isSubmitting}
+                >
+                  +
+                </button>
+              </Form>
+            );
+          }}
+        </Formik>
 
         <ul className={styles.DiaryList}>
           {products.map((p, i) => (

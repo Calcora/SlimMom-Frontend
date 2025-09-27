@@ -1,4 +1,9 @@
-import { useEffect, useMemo, useRef, useState } from "react";
+import { useEffect, useRef } from "react";
+import { Formik, Form, Field } from "formik";
+import * as Yup from "yup";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+
 import styles from "./GramCalc.module.css";
 import logo from "../assets/logo.png";
 
@@ -10,31 +15,36 @@ export default function GramCalc({
   onAdd,
   pending = false,
 }) {
-  const [name, setName] = useState("");
-  const [grams, setGrams] = useState("");
-  const [touched, setTouched] = useState({ name: false, grams: false });
-
-  // validations
-  const nameOk = name.trim().length >= 2;
-  const gramsNum = parseFloat(grams.replace(",", "."));
-  const gramsOk = !isNaN(gramsNum) && gramsNum > 0;
-  const canSubmit = nameOk && gramsOk && !pending;
-
   const nameRef = useRef(null);
+
   useEffect(() => {
     nameRef.current?.focus();
   }, []);
 
-  const submit = (e) => {
-    e.preventDefault();
-    setTouched({ name: true, grams: true });
-    if (!canSubmit) return;
-    onAdd?.({ name: name.trim(), grams: gramsNum });
-  };
+  const Schema = Yup.object({
+    name: Yup.string()
+      .trim()
+      .min(2, "Please enter at least 2 characters.")
+      .required("Please enter at least 2 characters."),
+    grams: Yup.number()
+      .transform((val, orig) => {
+        if (typeof orig === "string") {
+          const n = parseFloat(orig.replace(",", "."));
+          return Number.isNaN(n) ? val : n;
+        }
+        return val;
+      })
+      .typeError("Please enter a positive number.")
+      .positive("Please enter a positive number.")
+      .required("Please enter a positive number."),
+  });
 
   return (
     <div className={styles.Page}>
-      {/*Brand Bar*/}
+      {/* Toasts */}
+      <ToastContainer position="bottom-right" autoClose={2500} />
+
+      {/* Brand Bar */}
       <div className={styles.BrandBar}>
         <img src={logo} alt="SlimMom" className={styles.BrandLogo} />
         <button
@@ -49,7 +59,7 @@ export default function GramCalc({
         </button>
       </div>
 
-      {/* Sub Navbar*/}
+      {/* Sub Navbar */}
       <div className={styles.Navbar}>
         <button
           type="button"
@@ -67,51 +77,77 @@ export default function GramCalc({
         </div>
       </div>
 
-      {/*Form  */}
-      <form className={styles.Form} onSubmit={submit} noValidate>
-        <label className={styles.Label} htmlFor="name">
+      {/* Formik + Toastify */}
+      <Formik
+        initialValues={{ name: "", grams: "" }}
+        validationSchema={Schema}
+        onSubmit={(values, { setSubmitting, resetForm }) => {
+          const gramsNumber =
+            typeof values.grams === "number"
+              ? values.grams
+              : parseFloat(String(values.grams).replace(",", "."));
 
-        </label>
-        <input
-          id="name"
-          ref={nameRef}
-          type="text"
-          placeholder="Enter product name"
-          className={`${styles.Input} ${
-            touched.name && !nameOk ? styles.InputError : ""
-          }`}
-          value={name}
-          onChange={(e) => setName(e.target.value)}
-          onBlur={() => setTouched((t) => ({ ...t, name: true }))}
-        />
-        {touched.name && !nameOk && (
-          <p className={styles.Error}>Please enter at least 2 characters.</p>
-        )}
+          onAdd?.({
+            name: values.name.trim(),
+            grams: gramsNumber,
+          });
 
-        <label className={styles.Label} htmlFor="grams">
-         
-        </label>
-        <input
-          id="grams"
-          type="number"
-          step="0.1"
-          min="0"
-          placeholder="Grams"
-          className={`${styles.Input} ${
-            touched.grams && !gramsOk ? styles.InputError : ""
-          }`}
-          value={grams}
-          onChange={(e) => setGrams(e.target.value)}
-          onBlur={() => setTouched((t) => ({ ...t, grams: true }))}
-        />
-        {touched.grams && !gramsOk && (
-          <p className={styles.Error}>Please enter a positive number.</p>
-        )}
+          setSubmitting(false);
+          resetForm();
+          nameRef.current?.focus();
+          toast.success("Added ✔");
+        }}
+        validateOnChange={false}
+        validateOnBlur
+      >
+        {({ validateForm, submitForm, isSubmitting, setFieldValue }) => {
+          const handleAddClick = async () => {
+            const errs = await validateForm();
+            const keys = Object.keys(errs);
+            if (keys.length) {
+              const messages = keys.map((k) => errs[k]);
+              toast.error(messages.join(" • "));
+              return;
+            }
+            await submitForm();
+          };
 
-        <button type="submit" className={styles.AddBtn} disabled={!canSubmit}>
-          {pending ? "Adding..." : "Add"}
-        </button>
-      </form>
+          return (
+            <Form className={styles.Form} noValidate>
+              <label className={styles.Label} htmlFor="name"></label>
+              <Field
+                id="name"
+                name="name"
+                innerRef={nameRef}
+                placeholder="Enter product name"
+                className={styles.Input}
+              />
+
+              <label className={styles.Label} htmlFor="grams"></label>
+              <Field
+                id="grams"
+                name="grams"
+                type="text"
+                placeholder="Grams"
+                className={styles.Input}
+                onChange={(e) => {
+                  const v = e.target.value;
+                  setFieldValue("grams", v);
+                }}
+              />
+
+              <button
+                type="button"
+                className={styles.AddBtn}
+                onClick={handleAddClick}
+                disabled={pending || isSubmitting}
+              >
+                {pending || isSubmitting ? "Adding..." : "Add"}
+              </button>
+            </Form>
+          );
+        }}
+      </Formik>
     </div>
   );
 }
