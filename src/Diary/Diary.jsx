@@ -1,6 +1,6 @@
 import { useEffect, useState, forwardRef } from "react";
 import styles from "./Diary.module.css";
-import logo from "./assets/logo.png";
+import logo from "../assets/logo.png";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 
@@ -14,9 +14,9 @@ export default function Diary({
   onAddClick,
   onAdd,
   onDelete,
-  onDateChange, // isteğe bağlı: tarihi parent'ta yönetmek için
+  onDateChange, 
 }) {
-  // ---- Tarih (controlled / uncontrolled) ----
+  //Tarih
   const [localDate, setLocalDate] = useState(date);
   useEffect(() => {
     setLocalDate(date);
@@ -30,7 +30,6 @@ export default function Diary({
     else setLocalDate(d);
   };
 
-  // ---- Sadece ikon görünen custom input ----
   const CalendarIconBtn = forwardRef(function CalendarIconBtn(
     { onClick },
     ref
@@ -43,7 +42,6 @@ export default function Diary({
         onClick={onClick}
         ref={ref}
       >
-        {/* Gri renge boyanan SVG ikon */}
         <svg
           xmlns="http://www.w3.org/2000/svg"
           viewBox="0 0 24 24"
@@ -81,7 +79,7 @@ export default function Diary({
   const left = Math.max(dailyRate - consumed, 0);
   const percent = dailyRate > 0 ? Math.round((consumed / dailyRate) * 100) : 0;
 
-  // ---- Tablet/Desktop inline ekleme ----
+  //Tablet/Desktop inline ekleme
   const [nameInput, setNameInput] = useState("");
   const [gramsInput, setGramsInput] = useState("");
 
@@ -103,7 +101,6 @@ export default function Diary({
 
   return (
     <div className={styles.DiaryPage}>
-      {/* Brand bar */}
       <div className={styles.DiaryBrandBar}>
         <img src={logo} alt="SlimMom" className={styles.DiaryBrandLogo} />
         <div className={styles.DiaryNavDividerHeader}>
@@ -167,7 +164,6 @@ export default function Diary({
       <div className={styles.DiaryContent}>
         <h3 className={styles.DiaryDate}>
           {fmtDate(currentDate)}
-          {/* Sadece ikon görünüyor; tıklayınca takvim açılır */}
           <DatePicker
             selected={currentDate}
             onChange={handleDatePick}

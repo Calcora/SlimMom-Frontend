@@ -1,6 +1,6 @@
 import { useEffect, useMemo, useRef, useState } from "react";
 import styles from "./GramCalc.module.css";
-import logo from "./assets/logo.png";
+import logo from "../assets/logo.png";
 
 export default function GramCalc({
   title = "Nic",
@@ -34,7 +34,7 @@ export default function GramCalc({
 
   return (
     <div className={styles.Page}>
-      {/* === Brand Bar === */}
+      {/*Brand Bar*/}
       <div className={styles.BrandBar}>
         <img src={logo} alt="SlimMom" className={styles.BrandLogo} />
         <button
@@ -49,7 +49,7 @@ export default function GramCalc({
         </button>
       </div>
 
-      {/* === Sub Navbar === */}
+      {/* Sub Navbar*/}
       <div className={styles.Navbar}>
         <button
           type="button"
@@ -67,7 +67,7 @@ export default function GramCalc({
         </div>
       </div>
 
-      {/* === Form === */}
+      {/*Form  */}
       <form className={styles.Form} onSubmit={submit} noValidate>
         <label className={styles.Label} htmlFor="name">
 

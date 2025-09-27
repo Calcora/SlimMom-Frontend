@@ -1,6 +1,6 @@
 import { useState } from "react";
-import Diary from "./Diary";
-import GramCalc from "./GramCalc";
+import Diary from "./Diary/Diary";
+import GramCalc from "./Diary/GramCalc";
 
 export default function App() {
   const [view, setView] = useState("diary");

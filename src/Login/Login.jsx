@@ -1,7 +1,7 @@
 import { useState } from "react";
 import styles from "./Login.module.css";
-import mobilLogo from "./assets/mobilLogo.png";
-import tabletLogo from "./assets/logo.png";
+import mobilLogo from "../assets/mobilLogo.png";
+import tabletLogo from "../assets/logo.png";
 
 export default function Login({ onSubmit, onSwitchTab }) {
   const [email, setEmail] = useState("");

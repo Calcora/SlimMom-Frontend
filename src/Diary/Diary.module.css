@@ -262,24 +262,23 @@
 }
 
 .CalendarIcon {
-  color: #6b7280;            /* gri */
+  color: #6b7280;           
   transition: color 0.2s ease;
 }
 .CalendarIconBtn:hover .CalendarIcon {
-  color: #374151;            /* hover'da koyu gri */
+  color: #374151;            
 }
 
-/* Datepicker popper'ın her şeyin üstünde kalması için */
 .react-datepicker-popper {
   z-index: 10000;
 }
 
-/* Custom input kullandığımız için varsayılan input görünmesin */
+
 .react-datepicker__input-container input {
   display: none;
 }
 
-/* ---- Gray theme for react-datepicker ---- */
+
 :root {
   --dp-bg: #f5f6f7;
   --dp-surface: #ffffff;
@@ -456,8 +455,8 @@
 @media (min-width: 1024px) {
   .DiaryPage {
     display: grid;
-    grid-template-columns: 1fr 420px; /* sol | sağ */
-    grid-template-rows: auto 1fr; /* brandbar + içerik */
+    grid-template-columns: 1fr 420px; 
+    grid-template-rows: auto 1fr; 
     min-height: 100vh;
     background: #fff;
   }
@@ -475,7 +474,6 @@
     border-bottom: 1px solid #eef2f6;
   }
 
-  /* Sol içerik */
   .DiaryContent {
     grid-column: 1 / 2;
     grid-row: 2 / 3;
@@ -485,16 +483,16 @@
   /* --- SAĞ PANEL --- */
   .DiarySummary {
     grid-column: 2 / 3;
-    grid-row: 1 / 3; /* tepeye kadar */
-    display: block; /* içeriği üstten başlat */
+    grid-row: 1 / 3; 
+    display: block; 
     background: #f6f8fb;
     border-left: 1px solid #eef2f6;
     height: 100vh;
-    padding: 40px 48px; /* üstten boşluk */
+    padding: 40px 48px; 
     overflow: auto;
-    background-image: url("./assets/desktopDiary.png");
+    background-image: url("../assets/desktopDiary.png");
     background-repeat: no-repeat;
-    background-position: right center; /* yapraklar sağda */
+    background-position: right center; 
     background-size: auto 80%;
     margin-top: 0;
   }
@@ -518,20 +516,19 @@
     color: #6b7280;
     padding-left: 12px;
     margin-left: 4px;
-    border-left: 1px solid #d1d5db; /* | dikey çizgi */
+    border-left: 1px solid #d1d5db; 
   }
 
   .SummaryBox {
     margin-top: 150px;
   }
-  /* Summary başlığı */
+
   .SummaryBox h4 {
     margin: 0 0 16px 0;
     font-weight: 700;
     color: #111827;
   }
 
-  /* Summary satırları ALT ALTA */
   .SummaryList {
     list-style: none;
     margin: 0;
