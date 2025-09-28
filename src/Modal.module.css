@@ -30,7 +30,7 @@
 }
 
 .userInfo {
-  display: none;
+  display: block;
 }
 
 .logo {
@@ -267,15 +267,11 @@
   }
 
   .userInfo {
-    display: flex;
     position: absolute;
     left: 480px;
     top: 23px;
     width: 184px;
     height: 32px;
-    background-color: #FFFFFF;
-    transform: rotate(0deg);
-    opacity: 1;
   }
 
   .userInfo span:first-child {
@@ -283,14 +279,23 @@
     left: 0px;
     top: 11px;
     width: 122px;
-    height: 17px;
+    height: 12px;
     font-family: 'Verdana';
     font-weight: 700;
     font-size: 14px;
     line-height: 17px;
     letter-spacing: 0.04em;
     color: #212121;
-    text-align: left;
+    text-align: right;
+  }
+
+  .verticalLine {
+    position: absolute;
+    left: 137px;
+    top: 0px;
+    width: 0px;
+    height: 32px;
+    border-left: 2px solid #E0E0E0;
   }
 
   .userInfo span:last-child {
@@ -330,6 +335,43 @@
   .hamburger:hover {
     background-color: rgba(255, 255, 255, 0.1);
   }
+}
+
+/* Masaüstü */
+@media (min-width: 1024px) {
+  .modal {
+    width: 768px;
+    height: 1024px;
+  }
+
+  .content {
+    width: 768px;
+    height: 944px;
+    box-sizing: border-box;
+  }
+
+  .userInfo {
+    position: absolute;
+    left: 480px;
+    top: 23px;
+    width: 184px;
+    height: 32px;
+  }
+
+  .userInfo span:first-child {
+    position: absolute;
+    left: 0px;
+    top: 11px;
+    width: 122px;
+    height: 12px;
+    font-family: 'Verdana';
+    font-weight: 700;
+    font-size: 14px;
+    line-height: 17px;
+    letter-spacing: 0.04em;
+    color: #212121;
+    text-align: right;
+  }
 
   .verticalLine {
     position: absolute;
@@ -337,28 +379,28 @@
     top: 0px;
     width: 0px;
     height: 32px;
-    border-left: 2px solid #000;
+    border-left: 2px solid #E0E0E0;
   }
 
-  .userInfo button {
-    background: none;
-    border: none;
-    font: inherit;
-    color: inherit;
-    cursor: pointer;
-    padding: 0;
+  .userInfo span:last-child {
+    position: absolute;
+    left: 152px;
+    top: 11px;
+    width: 32px;
+    height: 17px;
+    font-family: 'Verdana';
+    font-weight: 700;
+    font-size: 14px;
+    line-height: 17px;
+    letter-spacing: 0.04em;
+    color: #9B9FAA;
   }
 }
 
-/* Masaüstü */
-@media (min-width: 1024px) {
-  .modal {
-    max-width: 600px;
-    height: 568px;
-  }
-
-  .content {
-    height: 488px;
+/* Mobil */
+@media (max-width: 767px) {
+  .userInfo {
+    display: none;
   }
 }
 

@@ -35,16 +35,16 @@ const Modal = ({ isOpen, onClose }) => {
     <div className={styles.overlay} onClick={onClose}>
       <div className={styles.modal} onClick={(e) => e.stopPropagation()}>
         <div className={styles.header}>
-           <img src={logo} alt="SlimMom" className={styles.logo} />
-           <div className={styles.userInfo}>
-             <button>Nic</button>
-             <div className={styles.verticalLine}></div>
-             <span>Exit</span>
-           </div>
-           <button className={styles.closeButton} onClick={onClose}>
-             ×
-           </button>
-         </div>
+            <img src={logo} alt="SlimMom" className={styles.logo} />
+            <div className={styles.userInfo}>
+              <span>Nic</span>
+              <div className={styles.verticalLine}></div>
+              <span>Exit</span>
+            </div>
+            <button className={styles.closeButton} onClick={onClose}>
+              ×
+            </button>
+          </div>
         <div className={styles.content}>
           <h1 className={styles.title}>
             <div>Diary</div>
