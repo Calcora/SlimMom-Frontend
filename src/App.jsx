@@ -4,35 +4,37 @@ import Diary from "./Diary/Diary";
 import GramCalc from "./Diary/GramCalc";
 import Login from "./Login/Login";
 import Register from "./Register/Registration";
-
+import Modal from "./Modal";
 
 function ProtectedRoute({ isAuth, children }) {
   if (!isAuth) return <Navigate to="/login" replace />;
   return children;
 }
 
- 
-import MainPage from "./MainPage/MainPage"; 
-
 export default function App() {
-  const [view, setView] = useState("main"); 
+  const [isAuth, setIsAuth] = useState(false);
+  const navigate = useNavigate();
   const [products, setProducts] = useState([]);
-  const [date, setDate] = useState(new Date());
-  const [dailyRate, setDailyRate] = useState(2800);
+  const [date] = useState(new Date());
+  const [dailyRate] = useState(2800);
+  const [showModal, setShowModal] = useState(true);
 
   // ---- Auth ----
+  // eslint-disable-next-line no-unused-vars
   const handleLogin = async ({ email, password }) => {
-    // backend 
+    // backend
     setIsAuth(true);
     navigate("/diary", { replace: true });
   };
 
+  // eslint-disable-next-line no-unused-vars
   const handleRegister = async ({ name, email, password }) => {
     // signup
     setIsAuth(true);
     navigate("/diary", { replace: true });
   };
 
+  // eslint-disable-next-line no-unused-vars
   const handleLogout = () => {
     setIsAuth(false);
     navigate("/login", { replace: true });
@@ -41,86 +43,51 @@ export default function App() {
   // ---- Diary/GramCalc ----
   const handleAdd = (item) => {
     setProducts((prev) => [...prev, item]);
-    navigate("/diary"); 
+    navigate("/diary");
   };
 
   const handleDelete = (index) => {
     setProducts((prev) => prev.filter((_, i) => i !== index));
   };
-  const handleOpenAdd = () => navigate("/add");
-  const handleBackToDiary = () => navigate("/diary");
-  const handleExit = () => navigate("/diary");
-  const handleMenuClick = () => console.log("menu");
+
+  const handleBack = () => navigate("/diary");
+  const handleExit = () => navigate("/login");
+  const handleMenuClick = () => {
+    console.log("menu");
+  };
 
   return (
-    <Routes>
-      {/* Login & Register */}
-      <Route
-        path="/login"
-        element={
-          <Login
-            onSubmit={handleLogin}
-            onSwitchTab={(tab) =>
-              tab === "register" ? navigate("/register") : null
-            }
-          />
-        }
-      />
-      <Route
-        path="/register"
-        element={
-          <Register
-            onSubmit={handleRegister}
-            onSwitchTab={(tab) => (tab === "login" ? navigate("/login") : null)}
-          />
-        }
-      />
-
-      {/* Diary korumalı */}
-      <Route
-        path="/diary"
-        element={
-          <ProtectedRoute isAuth={isAuth}>
-            <Diary
-              products={products}
-              date={date}
-              dailyRate={dailyRate}
-              onBack={handleBackToDiary}
-              onExit={handleLogout}
-              onMenuClick={handleMenuClick}
-              onAddClick={handleOpenAdd} 
-              onAdd={handleAdd} 
-              onDelete={handleDelete}
-              onDateChange={setDate}
-            />
-          </ProtectedRoute>
-        }
-      />
-
-      {/* GramCalc (modal sayfası) korumalı */}
-      <Route
-        path="/add"
-        element={
-          <ProtectedRoute isAuth={isAuth}>
-            <GramCalc
-              title="Nic"
-              onMenuClick={handleMenuClick}
-              onBack={handleBackToDiary}
-              onExit={handleExit}
-              onAdd={handleAdd}
-              pending={false}
-            />
-          </ProtectedRoute>
-        }
-      />
-
-      {/* Kök ve 404 yönlendirmeleri */}
-      <Route
-        path="/"
-        element={<Navigate to={isAuth ? "/diary" : "/login"} replace />}
-      />
-      <Route path="*" element={<Navigate to="/" replace />} />
-    </Routes>
+    <>
+      <Routes>
+        <Route path="/login" element={<Login onLogin={handleLogin} />} />
+        <Route path="/register" element={<Register onRegister={handleRegister} />} />
+        <Route
+          path="/diary"
+          element={
+            <ProtectedRoute isAuth={isAuth}>
+              <Diary
+                products={products}
+                date={date}
+                dailyRate={dailyRate}
+                onBack={handleBack}
+                onExit={handleExit}
+                onMenuClick={handleMenuClick}
+                onAdd={handleAdd}
+                onDelete={handleDelete}
+              />
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          path="/"
+          element={<Navigate to={isAuth ? "/diary" : "/login"} replace />}
+        />
+        <Route path="*" element={<Navigate to="/" replace />} />
+      </Routes>
+      <Modal isOpen={showModal} onClose={() => setShowModal(false)}>
+        <p>Modal çalışıyor</p>
+      </Modal>
+    </>
   );
 }
   
