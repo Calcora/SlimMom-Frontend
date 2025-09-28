@@ -26,50 +26,6 @@ export default function Register({ onSubmit, onSwitchTab }) {
     <div className={styles.registrationWrap}>
       {/* Toasts */}
       <ToastContainer position="bottom-right" autoClose={2500} />
-
-      {/* HEADER */}
-      <div className={styles.registrationHeader}>
-        <div className={styles.registrationLogo}>
-          <picture>
-            <source media="(min-width: 1200px)" srcSet={tabletLogo} />
-            <source media="(min-width: 768px)" srcSet={tabletLogo} />
-            <img
-              src={mobilLogo}
-              alt="SlimMom"
-              className={styles.logoImg}
-              width="120"
-              height="28"
-              decoding="async"
-            />
-          </picture>
-        </div>
-
-        {/* Tabs */}
-        <div
-          className={styles.registrationHeaderTabs}
-          role="tablist"
-          aria-label="Auth tabs"
-        >
-          <button
-            type="button"
-            role="tab"
-            aria-selected="false"
-            className={styles.registrationTab}
-            onClick={() => onSwitchTab?.("login")}
-          >
-            LOG IN
-          </button>
-          <button
-            type="button"
-            role="tab"
-            aria-selected="true"
-            className={`${styles.registrationTab} ${styles.registrationActive}`}
-          >
-            REGISTRATION
-          </button>
-        </div>
-      </div>
-
       {/* FORM */}
       <Formik
         initialValues={{ name: "", email: "", password: "" }}

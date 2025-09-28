@@ -1,9 +1,7 @@
 import { useEffect, useState, forwardRef } from "react";
 import styles from "./Diary.module.css";
-import logo from "../assets/logo.png";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
-
 import { Formik, Form, Field } from "formik";
 import * as Yup from "yup";
 import { ToastContainer, toast } from "react-toastify";
@@ -13,9 +11,6 @@ export default function Diary({
   products = [],
   date = new Date(),
   dailyRate = 2800,
-  onBack,
-  onExit,
-  onMenuClick,
   onAddClick,
   onAdd,
   onDelete,
@@ -107,65 +102,6 @@ export default function Diary({
     <div className={styles.DiaryPage}>
       {/* Toast container */}
       <ToastContainer position="top-center" autoClose={2500} />
-
-      <div className={styles.DiaryBrandBar}>
-        <img src={logo} alt="SlimMom" className={styles.DiaryBrandLogo} />
-        <div className={styles.DiaryNavDividerHeader}>
-          <div className={styles.DiaryTitle}>Nic</div>
-          <button
-            type="button"
-            className={styles.DiaryExitBtn}
-            onClick={onExit}
-          >
-            Exit
-          </button>
-        </div>
-        <button
-          type="button"
-          className={styles.DiaryHamburger}
-          aria-label="Menu"
-          onClick={onMenuClick}
-        >
-          <svg
-            className={styles.DiaryHamburgerIcon}
-            viewBox="0 0 24 24"
-            width="24"
-            height="24"
-            aria-hidden="true"
-          >
-            <path
-              d="M3 6h18M3 12h18M3 18h18"
-              fill="none"
-              stroke="currentColor"
-              strokeWidth="2"
-              strokeLinecap="round"
-            />
-          </svg>
-        </button>
-      </div>
-
-      {/* Header */}
-      <div className={styles.DiaryHeader}>
-        <button
-          type="button"
-          className={styles.DiaryBackBtn}
-          onClick={onBack}
-          aria-label="Back"
-        >
-          ←
-        </button>
-
-        <div className={styles.DiaryNavDivider}>
-          <div className={styles.DiaryTitle}>Nic</div>
-          <button
-            type="button"
-            className={styles.DiaryExitBtn}
-            onClick={onExit}
-          >
-            Exit
-          </button>
-        </div>
-      </div>
 
       {/* Content */}
       <div className={styles.DiaryContent}>
@@ -277,16 +213,6 @@ export default function Diary({
 
       {/* Summary */}
       <div className={styles.DiarySummary}>
-        <div className={styles.DiaryNavDividerHeaderSummary}>
-          <div className={styles.DiaryTitle}>Nic</div>
-          <button
-            type="button"
-            className={styles.DiaryExitBtn}
-            onClick={onExit}
-          >
-            Exit
-          </button>
-        </div>
 
         {/* SOL sütun */}
         <div className={styles.SummaryBox}>

@@ -3,15 +3,10 @@ import { Formik, Form, Field } from "formik";
 import * as Yup from "yup";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-
 import styles from "./GramCalc.module.css";
-import logo from "../assets/logo.png";
+
 
 export default function GramCalc({
-  title = "Nic",
-  onMenuClick,
-  onBack,
-  onExit,
   onAdd,
   pending = false,
 }) {
@@ -43,40 +38,6 @@ export default function GramCalc({
     <div className={styles.Page}>
       {/* Toasts */}
       <ToastContainer position="bottom-right" autoClose={2500} />
-
-      {/* Brand Bar */}
-      <div className={styles.BrandBar}>
-        <img src={logo} alt="SlimMom" className={styles.BrandLogo} />
-        <button
-          type="button"
-          className={styles.Hamburger}
-          onClick={onMenuClick}
-          aria-label="Menu"
-        >
-          <span />
-          <span />
-          <span />
-        </button>
-      </div>
-
-      {/* Sub Navbar */}
-      <div className={styles.Navbar}>
-        <button
-          type="button"
-          className={styles.BackBtn}
-          onClick={onBack}
-          aria-label="Back"
-        >
-          ←
-        </button>
-        <div className={styles.NavDivider}>
-          <div className={styles.NavTitle}>{title}</div>
-          <button type="button" className={styles.ExitBtn} onClick={onExit}>
-            Exit
-          </button>
-        </div>
-      </div>
-
       {/* Formik + Toastify */}
       <Formik
         initialValues={{ name: "", grams: "" }}

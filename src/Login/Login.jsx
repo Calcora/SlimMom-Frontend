@@ -21,44 +21,6 @@ export default function Login({ onSubmit, onSwitchTab }) {
     <div className={styles.loginWrap}>
       {/* Toasts */}
       <ToastContainer position="bottom-right" autoClose={2500} />
-
-      <div className={styles.loginHeader}>
-        <div className={styles.loginLogo}>
-          <picture>
-            {/* 1200px+ */}
-            <source media="(min-width: 1200px)" srcSet={tabletLogo} />
-            {/* 768px+ */}
-            <source media="(min-width: 768px)" srcSet={tabletLogo} />
-            {/* Mobile default */}
-            <img
-              src={mobilLogo}
-              alt="SlimMom"
-              className={styles.logoImg}
-              width="120"
-              height="28"
-              decoding="async"
-            />
-          </picture>
-        </div>
-
-        <div className={styles.loginHeaderTabs}>
-          <button
-            type="button"
-            className={`${styles.loginTab} ${styles.loginActive}`}
-          >
-            LOG IN
-          </button>
-
-          <button
-            type="button"
-            className={styles.loginTab}
-            onClick={() => onSwitchTab?.("register")}
-          >
-            REGISTRATION
-          </button>
-        </div>
-      </div>
-
       {/* Formik + Toastify */}
       <Formik
         initialValues={{ email: "", password: "" }}
