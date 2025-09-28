@@ -1,8 +1,18 @@
 import { useState } from "react";
-import Diary from "./Diary";
-import GramCalc from "./GramCalc";
-import MainPage from "./MainPage/MainPage";
-import Modal from "./Modal";
+import { Routes, Route, Navigate, useNavigate } from "react-router-dom";
+import Diary from "./Diary/Diary";
+import GramCalc from "./Diary/GramCalc";
+import Login from "./Login/Login";
+import Register from "./Register/Registration";
+
+
+function ProtectedRoute({ isAuth, children }) {
+  if (!isAuth) return <Navigate to="/login" replace />;
+  return children;
+}
+
+ 
+import MainPage from "./MainPage/MainPage"; 
 
 export default function App() {
   const [view, setView] = useState("main"); 
@@ -10,11 +20,28 @@ export default function App() {
   const [date] = useState(new Date());
   const [dailyRate] = useState(2800);
 
-  const handleAddClick = () => setView("add");
+  // ---- Auth ----
+  const handleLogin = async ({ email, password }) => {
+    // backend 
+    setIsAuth(true);
+    navigate("/diary", { replace: true });
+  };
 
+  const handleRegister = async ({ name, email, password }) => {
+    // signup
+    setIsAuth(true);
+    navigate("/diary", { replace: true });
+  };
+
+  const handleLogout = () => {
+    setIsAuth(false);
+    navigate("/login", { replace: true });
+  };
+
+  // ---- Diary/GramCalc ----
   const handleAdd = (item) => {
     setProducts((prev) => [...prev, item]);
-    setView("diary");
+    navigate("/diary"); 
   };
 
   const handleDelete = (index) => {
@@ -24,12 +51,12 @@ export default function App() {
   const handleBack = () => setView("diary");
   const handleExit = () => setView("main"); 
   const handleMenuClick = () => {
-    setView("main");
+    console.log("menu");
   };
 
   
   if (view === "main") {
-    return <Modal isOpen={true} onClose={() => setView("diary")} children={<div>Modal Content</div>} />;
+    return <MainPage />;
   }
 
   if (view === "diary") {
@@ -47,19 +74,30 @@ export default function App() {
     );
   }
 
-  if (view === "add") {
-    return (
-      <GramCalc
-        title="Nic"
-        onMenuClick={handleMenuClick}
-        onBack={() => setView("diary")}
-        onExit={() => setView("diary")}
-        onAdd={handleAdd}
-        pending={false}
+      {/* GramCalc (modal sayfası) korumalı */}
+      <Route
+        path="/add"
+        element={
+          <ProtectedRoute isAuth={isAuth}>
+            <GramCalc
+              title="Nic"
+              onMenuClick={handleMenuClick}
+              onBack={handleBackToDiary}
+              onExit={handleExit}
+              onAdd={handleAdd}
+              pending={false}
+            />
+          </ProtectedRoute>
+        }
       />
-    );
-  }
 
-  // Default fallback to MainPage
-  return <MainPage />;
+      {/* Kök ve 404 yönlendirmeleri */}
+      <Route
+        path="/"
+        element={<Navigate to={isAuth ? "/diary" : "/login"} replace />}
+      />
+      <Route path="*" element={<Navigate to="/" replace />} />
+    </Routes>
+  );
 }
+  
