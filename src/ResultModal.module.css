@@ -64,3 +64,67 @@
   font-size: 14px;
   font-weight: 700;
 }
+
+.backdrop {
+  width: 100%;
+  height: 100%;
+}
+
+.modalBox {
+  width: 100%;
+  height: 100%;
+  position: relative;
+}
+
+.closeBtn {
+  display: none;
+  position: absolute;
+  top: 12px;
+  right: 12px;
+  width: 36px;
+  height: 36px;
+  border: none;
+  background: #f0f0f0;
+  border-radius: 50%;
+  font-size: 22px;
+  line-height: 36px;
+  cursor: pointer;
+}
+
+/*Tablet*/
+@media (min-width: 768px) {
+  .backdrop {
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.45);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 999; 
+  }
+
+  .modalBox {
+    width: 672px;
+    height: 574px;
+    background: #ffffff;
+    box-shadow: 0 12px 30px rgba(0, 0, 0, 0.15);
+    overflow: hidden;
+  }
+
+  .resultModalContainer {
+    width: 100%;
+    height: 100%;
+  }
+
+  .closeBtn {
+    display: inline-block;
+  }
+  .resultModalText {
+    width: 508px;
+    font-family: Verdana;
+    font-weight: 700;
+    font-size: 26px;
+    letter-spacing: 0%;
+    text-align: center;
+  }
+}
