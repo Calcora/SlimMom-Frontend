@@ -4,6 +4,7 @@ import storage from "redux-persist/lib/storage";
 
 // Reducers
 import authRecuder from "./auth/slice.js";
+import publicCalculator from "./publicCalculator/slice.js";
 const authPersistConfig = {
   key: "auth",
   storage,
@@ -15,6 +16,7 @@ const authPersisteredReducer = persistReducer(authPersistConfig, authRecuder);
 export const store = configureStore({
   reducer: {
     auth: authPersisteredReducer,
+    publicCalculator: publicCalculator,
   },
 });
 

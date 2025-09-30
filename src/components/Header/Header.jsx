@@ -17,7 +17,10 @@ const Header = () => {
   return (
     <div className={styles.HeaderContainer}>
       <div className={styles.Header}>
-        <div className={styles.Logo}>
+        <div
+          className={styles.Logo}
+          onClick={() => (window.location.href = "/")}
+        >
           <img src={logo} className={styles.LogoImg} about="SlimMom Logo" />
           <p className={styles.LogoTitle}>
             Slim<span className={styles.LogoTitleSpan}>Mom</span>
@@ -25,7 +28,7 @@ const Header = () => {
         </div>
         <div className={styles.HeaderDivider}>
           {!isTabletOrMobile ? (
-            !token ? (
+            token ? (
               <ul className={styles.NavList}>
                 <li className={styles.NavItem}>
                   <a href="/diary" className={styles.NavLink}>
@@ -54,7 +57,7 @@ const Header = () => {
             )
           ) : null}
 
-          {!isMobile && !token ? (
+          {!isMobile && token ? (
             <>
               <ul className={styles.AuthList}>
                 <li className={styles.AuthItem}>
@@ -92,7 +95,7 @@ const Header = () => {
           </div>
         )}
       </div>
-      {isMobile && !token ? (
+      {isMobile && token ? (
         <div className={styles.SubHeader}>
           <div className={styles.AuthNav}>
             <IoReturnDownBack size={20} className={styles.AuthBtn} />
@@ -112,19 +115,36 @@ const Header = () => {
           </div>
         </div>
       ) : null}
-      {isTabletOrMobile && isMenuShow && !token ? (
+      {isTabletOrMobile && isMenuShow ? (
         <div className={styles.HeaderModalMenu}>
           <ul className={styles.ModalMenuList}>
-            <li className={styles.ModalMenuItem}>
-              <a href="/diary" className={styles.ModalMenuLink}>
-                Diary
-              </a>
-            </li>
-            <li className={styles.ModalMenuItem}>
-              <a href="/calculator" className={styles.ModalMenuLink}>
-                Calculator
-              </a>
-            </li>
+            {token ? (
+              <>
+                <li className={styles.ModalMenuItem}>
+                  <a href="/diary" className={styles.ModalMenuLink}>
+                    Diary
+                  </a>
+                </li>
+                <li className={styles.ModalMenuItem}>
+                  <a href="/calculator" className={styles.ModalMenuLink}>
+                    Calculator
+                  </a>
+                </li>
+              </>
+            ) : (
+              <>
+                <li className={styles.ModalMenuItem}>
+                  <a href="/login" className={styles.ModalMenuLink}>
+                    Log In
+                  </a>
+                </li>
+                <li className={styles.ModalMenuItem}>
+                  <a href="/register" className={styles.ModalMenuLink}>
+                    Registration
+                  </a>
+                </li>
+              </>
+            )}
           </ul>
         </div>
       ) : null}

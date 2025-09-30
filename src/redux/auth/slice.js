@@ -4,16 +4,7 @@ import {
   // isPending,
   // isRejected,
 } from "@reduxjs/toolkit";
-// import {
-//   loginUser,
-//   refreshUserToken,
-//   logoutUser,
-//   registerUser,
-//   currentUser,
-// } from "./operations";
-
-// Utils
-// import toast from "react-hot-toast";
+import { registerUser } from "./operations.js";
 
 const initialState = {
   token: null,
@@ -27,7 +18,11 @@ const authSlice = createSlice({
       state.token = action.payload.token;
     },
   },
-  extraReducers: (builder) => {},
+  extraReducers: (builder) => {
+    builder.addCase(registerUser.fulfilled, (state, action) => {
+      state.token = action.payload.token;
+    });
+  },
 });
 
 export default authSlice.reducer;
