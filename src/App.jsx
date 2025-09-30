@@ -5,9 +5,11 @@ import { Routes, Route, Navigate } from "react-router-dom";
 // import Register from "./Register/Registration";
 
 import Page from "./pages/Page";
+import ProtectedRoute from "./components/ProtectedRoute";
 const PublicCalculator = lazy(() =>
   import("./pages/PublicCalculator/PublicCalculator")
 );
+const Diary = lazy(() => import("./pages/Diary/Diary"));
 const Login = lazy(() => import("./pages/Login/Login"));
 const Register = lazy(() => import("./pages/Register/Register"));
 const App = () => {
@@ -43,7 +45,16 @@ const App = () => {
          */}
 
         {/* Diary korumalı */}
-
+        <Route
+          path="/diary"
+          element={
+            <ProtectedRoute>
+              <Page>
+                <Diary />
+              </Page>
+            </ProtectedRoute>
+          }
+        />
         <Route path="*" element={<Navigate to="/" replace />} />
       </Routes>
     </Suspense>

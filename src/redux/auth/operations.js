@@ -10,6 +10,7 @@ export const loginUser = createAsyncThunk(
       const response = await api.post("auth/login", _);
       console.log("Login response:", response);
       if (response.status === 200) {
+        toast.success("Login successful ✔");
         return response.data;
       } else {
         return thunkAPI.rejectWithValue(response.data.message);

@@ -3,7 +3,12 @@ import { Formik, Form, Field } from "formik";
 import * as Yup from "yup";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+
+import { useDispatch } from "react-redux";
+import { loginUser } from "../../redux/auth/operations.js";
+
 const Login = () => {
+  const dispatch = useDispatch();
   const Schema = Yup.object({
     email: Yup.string()
       .trim()
@@ -24,12 +29,8 @@ const Login = () => {
         validationSchema={Schema}
         onSubmit={async (values, { setSubmitting, resetForm }) => {
           try {
-            await onSubmit?.({
-              email: values.email.trim(),
-              password: values.password,
-            });
-            
-            toast.success("Logged in ✔");
+            dispatch(loginUser(values));
+
             resetForm();
           } catch (err) {
             toast.error(
@@ -95,7 +96,7 @@ const Login = () => {
                 <button
                   type="button"
                   className={styles.loginOutlineBtn}
-                  onClick={() => onSwitchTab?.("register")}
+                  onClick={() => window.location.replace("/register")}
                 >
                   Register
                 </button>

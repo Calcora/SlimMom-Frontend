@@ -10,9 +10,9 @@
 
 /* kart */
 .loginWrap {
-    width: min(312px, 92vw);
+    width: 100%;
     height: auto;
-    margin: 24px auto;
+    margin: 40px 20xp;
     background: var(--bg-card);
     border-radius: 12px;
     box-shadow: var(--shadow-card);
@@ -163,12 +163,12 @@
 /* responsive */
 @media (min-width: 768px) {
     .loginWrap {
-        width: 704px;
+        width: 100%;
         min-height: 100vh;
         margin: 0 auto;
         border-radius: 0;
         box-shadow: none;
-        background: var(--bg-card) url("../assets/tabletLogo.png") no-repeat right bottom;
+        background: transparent;
         background-size: cover;
         display: flex;
         flex-direction: column;
@@ -242,7 +242,7 @@
         display: flex;
         flex-direction: column;
         background-size: contain;
-        background: var(--bg-card) url("../assets/all.jpg") no-repeat right bottom;
+        background: transparent;
     }
 
     .loginHeader {

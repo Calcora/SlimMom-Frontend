@@ -48,7 +48,7 @@ const Register = () => {
             // Backend hatası vs.
             console.error(err);
           } finally {
-            // setSubmitting(false);
+            setSubmitting(false);
           }
         }}
         validateOnChange={false}
@@ -119,7 +119,7 @@ const Register = () => {
                 <button
                   type="button"
                   className={styles.registrationOutlineBtn}
-                  onClick={() => onSwitchTab?.("login")}
+                  onClick={() => window.location.replace("/login")}
                 >
                   Log in
                 </button>
