@@ -4,9 +4,14 @@ import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
 import { useDispatch, useSelector } from "react-redux";
-import { getTodayDiary } from "../../redux/userDiary/operations.js";
+import { getTodayDiary, calculator } from "../../redux/userDiary/operations.js";
+import ResultModal from "../../components/ResultModal/ResultModal.jsx";
 const Calculator = () => {
-  const { selectedDate, data } = useSelector((state) => state.userDiary);
+  const {
+    selectedDate,
+    modalView,
+    data: PrivateData,
+  } = useSelector((state) => state.userDiary);
   const dispatch = useDispatch();
   useEffect(() => {
     dispatch(getTodayDiary());
@@ -31,16 +36,17 @@ const Calculator = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
     console.log("Form submitted:", formData);
+    dispatch(calculator(formData));
     // Form submit logic here
   };
 
   const summaryData = {
     date: selectedDate || new Date().toISOString().split("T")[0],
     stats: [
-      { label: "Left", value: data.left + " kcal" },
-      { label: "Consumed", value: data.consumed + " kcal" },
-      { label: "Daily rate", value: data.dailyRate + " kcal" },
-      { label: "n% of normal", value: data.nOfNormal + "%" },
+      { label: "Left", value: PrivateData.left + " kcal" },
+      { label: "Consumed", value: PrivateData.consumed + " kcal" },
+      { label: "Daily rate", value: PrivateData.dailyRate + " kcal" },
+      { label: "n% of normal", value: PrivateData.nOfNormal + "%" },
     ],
   };
 
@@ -153,8 +159,8 @@ const Calculator = () => {
           <div className={styles.summaryRight}>
             <h2 className={styles.summaryTitle}>Food not recommended</h2>
             <p className={styles.dietText}>
-              {data.notAllowedProducts.length > 0
-                ? data.notAllowedProducts.map((item, idx) => (
+              {PrivateData.notAllowedProducts.length > 0
+                ? PrivateData.notAllowedProducts.map((item, idx) => (
                     <span key={idx}>{item}</span>
                   ))
                 : "Your diet will be displayed here"}
@@ -181,14 +187,15 @@ const Calculator = () => {
         <div>
           <h2 className={styles.summaryTitle}>Food not recommended</h2>
           <p className={styles.dietText}>
-            {data.notAllowedProducts.length > 0
-              ? data.notAllowedProducts.map((item, idx) => (
+            {PrivateData.notAllowedProducts.length > 0
+              ? PrivateData.notAllowedProducts.map((item, idx) => (
                   <span key={idx}>{item}</span>
                 ))
               : "Your diet will be displayed here"}
           </p>
         </div>
       </aside>
+      {modalView !== false && <ResultModal data={PrivateData} />}
     </div>
   );
 };

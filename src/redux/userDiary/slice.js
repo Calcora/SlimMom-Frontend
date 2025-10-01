@@ -1,14 +1,8 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { getTodayDiary } from "./operations.js";
+import { calculator, getTodayDiary } from "./operations.js";
 
 const initialState = {
-  calculator_Data: {
-    height: null,
-    age: null,
-    currentWeight: null,
-    desiredWeight: null,
-    bloodType: null,
-  },
+  modalView: false,
   data: {
     left: 0,
     consumed: 0,
@@ -32,6 +26,9 @@ const userDiarySlice = createSlice({
   name: "userDiary",
   initialState,
   reducers: {
+    modalResetData: (state) => {
+      state.modalView = false;
+    },
     setSelectedDate_Data(state, action) {
       state.selectedDate_Data = action.payload;
     },
@@ -44,6 +41,9 @@ const userDiarySlice = createSlice({
       state.data = action.payload.data;
       state.selectedDate = action.payload.date;
       state.selectedDate_Data = action.payload.data;
+    });
+    builder.addCase(calculator.fulfilled, (state) => {
+      state.modalView = true;
     });
   },
 });

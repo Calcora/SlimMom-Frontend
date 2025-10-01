@@ -20,20 +20,12 @@ export default function Diary({
   onDelete,
   onDateChange,
 }) {
-  const dispatch = useDispatch();
-  const allProducts = useSelector((state) => state.products.list);
   // Tarih (controlled/uncontrolled destekli)
-  const [productList, setPrductList] = useState([]);
+  const [productList] = useState([]);
   const [localDate, setLocalDate] = useState(date);
   useEffect(() => {
     setLocalDate(date);
   }, [date]);
-
-  useEffect(() => {
-    dispatch(getProducts()).then((res) =>
-      setPrductList(res.payload.map((p) => ({ value: p.name, label: p.name })))
-    );
-  }, [dispatch, allProducts]);
 
   const currentDate = onDateChange ? new Date() : localDate;
 

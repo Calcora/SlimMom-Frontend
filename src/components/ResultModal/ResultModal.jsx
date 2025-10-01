@@ -1,6 +1,7 @@
 import styles from "./ResultModal.module.css";
 import { useDispatch } from "react-redux";
-import { resetData } from "../../redux/publicCalculator/actions.js";
+import { resetData as resetPublicCal } from "../../redux/publicCalculator/actions.js";
+import { resetData as resetUserData } from "../../redux/userDiary/actions.js";
 const ResultModal = ({ data }) => {
   const dispatch = useDispatch();
   return (
@@ -9,7 +10,7 @@ const ResultModal = ({ data }) => {
         Your recommended daily calorie intake is
       </p>
       <p className={styles.resultModalKcal}>
-        {data ? data.calorie : 0}{" "}
+        {data ? data.calorie || data.dailyRate : 0}{" "}
         <span className={styles.resultModalKcalSpan}> kcal</span>
       </p>
       <div className={styles.FoodContainer}>
@@ -25,7 +26,8 @@ const ResultModal = ({ data }) => {
       <button
         className={styles.ModalBtn}
         onClick={() => {
-          dispatch(resetData());
+          dispatch(resetPublicCal());
+          dispatch(resetUserData());
         }}
       >
         Start losing weight

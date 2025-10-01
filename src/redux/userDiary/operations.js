@@ -43,3 +43,26 @@ export const getSelectedDateDiary = createAsyncThunk(
     }
   }
 );
+
+export const calculator = createAsyncThunk(
+  "userDiary/calculator",
+  async (formData, thunkAPI) => {
+    try {
+      const response = await api.post("/calorie/private", {
+        userData: formData,
+      });
+      if (response.status === 201) {
+        toast.success("Calculator data submitted successfully");
+        thunkAPI.dispatch(getTodayDiary());
+        return response.data.data;
+      } else {
+        toast.error("Failed to submit calculator data");
+        return thunkAPI.rejectWithValue("Failed to submit calculator data");
+      }
+    } catch (error) {
+      toast.warning("Failed to submit calculator data");
+      console.error("Error submitting calculator data:", error);
+      return thunkAPI.rejectWithValue(error.message);
+    }
+  }
+);
