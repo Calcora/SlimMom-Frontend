@@ -5,8 +5,9 @@
     padding-top: 80px;
     padding-inline: 16px;
     /* margin-bottom: 150px; */
-    position: sticky;
-    z-index: 100;
+    width: 100%;
+    position: absolute;
+    z-index: 1005;
     gap: 20px;
 }
 
@@ -100,7 +101,7 @@
         position: relative;
         padding: 0;
         border-bottom: 2px solid #E0E0E0;
-        margin-bottom: 100px;
+        /* margin-bottom: 100px; */
         justify-content: space-between;
     }
 

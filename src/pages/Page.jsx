@@ -4,7 +4,7 @@ const Page = ({ children }) => {
   return (
     <div className={styles.PageContainer}>
       <Header />
-      {children}
+      <div className={styles.Spacer}>{children}</div>
     </div>
   );
 };

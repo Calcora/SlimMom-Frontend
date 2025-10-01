@@ -67,7 +67,7 @@ const Header = () => {
                 </li>
                 <hr className={styles.AuthHr} />
                 <li className={styles.AuthItem}>
-                  <a href="/register" className={styles.AuthLink}>
+                  <a href="/logout" className={styles.AuthLink}>
                     Exit
                   </a>
                 </li>
@@ -101,13 +101,13 @@ const Header = () => {
             <IoReturnDownBack size={20} className={styles.AuthBtn} />
             <ul className={styles.AuthList}>
               <li className={styles.AuthItem}>
-                <a href="/login" className={styles.AuthLink}>
+                <a href="#" className={styles.AuthLink}>
                   Nic
                 </a>
               </li>
               <hr className={styles.AuthHr} />
               <li className={styles.AuthItem}>
-                <a href="/register" className={styles.AuthLink}>
+                <a href="/logout" className={styles.AuthLink}>
                   Exit
                 </a>
               </li>

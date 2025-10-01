@@ -4,7 +4,7 @@ import {
   // isPending,
   // isRejected,
 } from "@reduxjs/toolkit";
-import { loginUser } from "./operations.js";
+import { loginUser, logoutUser } from "./operations.js";
 
 const initialState = {
   token: null,
@@ -19,9 +19,13 @@ const authSlice = createSlice({
     },
   },
   extraReducers: (builder) => {
-    builder.addCase(loginUser.fulfilled, (state, action) => {
-      state.token = action.payload.token;
-    });
+    builder
+      .addCase(loginUser.fulfilled, (state, action) => {
+        state.token = action.payload.token;
+      })
+      .addCase(logoutUser.fulfilled, (state) => {
+        state.token = null;
+      });
   },
 });
 

@@ -11,6 +11,7 @@ export const loginUser = createAsyncThunk(
       console.log("Login response:", response);
       if (response.status === 200) {
         toast.success("Login successful ✔");
+        window.location.replace("/diary");
         return response.data;
       } else {
         return thunkAPI.rejectWithValue(response.data.message);
@@ -21,6 +22,14 @@ export const loginUser = createAsyncThunk(
     }
   }
 );
+
+export const logoutUser = createAsyncThunk(
+  "auth/logoutUser",
+  async (_, thunkAPI) => {
+    console.log("Logout User dispatched");
+    return thunkAPI.fulfillWithValue();
+  }
+);
 export const registerUser = createAsyncThunk(
   "auth/registerUser",
   async (_, thunkAPI) => {
@@ -29,6 +38,7 @@ export const registerUser = createAsyncThunk(
       const response = await api.post("auth/register", _);
       console.log("Registration response:", response);
       if (response.status === 201) {
+        thunkAPI.dispatch(loginUser({ email: _.email, password: _.password }));
         return response.data;
       } else {
         toast.error("Registration failed: " + response.data.message);

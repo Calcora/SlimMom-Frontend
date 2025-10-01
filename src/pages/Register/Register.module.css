@@ -247,12 +247,13 @@
     .registrationWrap {
         width: 100%;
         max-width: none;
-        /* min-height: 100dvh; */
+        min-height: 100vh;
         margin: 0;
         border-radius: 0;
         box-shadow: none;
         display: flex;
-        flex-direction: column;
+        flex-direction: column-reverse;
+        justify-content: space-around;
         background-size: contain;
         /* background: var(--bg-card) url("../assets/all.jpg") no-repeat right bottom; */
     }

@@ -11,11 +11,11 @@
 /* kart */
 .loginWrap {
     width: 100%;
-    height: auto;
+    height: 100%;
     margin: 40px 20xp;
     background: var(--bg-card);
     border-radius: 12px;
-    box-shadow: var(--shadow-card);
+    /* box-shadow: var(--shadow-card); */
     overflow: hidden;
     font-family: Verdana, Geneva, Tahoma, sans-serif;
 }
@@ -172,6 +172,8 @@
         background-size: cover;
         display: flex;
         flex-direction: column;
+        justify-content: flex-start;
+        border: 1px solid red;
     }
 
     .loginHeader {
@@ -235,14 +237,16 @@
     .loginWrap {
         /* width: 100%; */
         max-width: none;
-        min-height: 100dvh;
+        min-height: 100vh;
         margin: 0;
         border-radius: 0;
         box-shadow: none;
         display: flex;
-        flex-direction: column;
+        flex-direction: column-reverse;
+        justify-content: space-around;
         background-size: contain;
         background: transparent;
+        border: 1px solid red;
     }
 
     .loginHeader {
