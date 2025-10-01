@@ -1,4 +1,4 @@
-import { useEffect, useState, forwardRef, use } from "react";
+import { useEffect, useState, forwardRef } from "react";
 import styles from "./Diary.module.css";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
@@ -8,7 +8,8 @@ import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import Select from "react-select";
 import { useDispatch, useSelector } from "react-redux";
-import api from "../../redux/api";
+
+import { getProducts } from "../../redux/products/operations.js";
 
 export default function Diary({
   products = [],
@@ -19,26 +20,22 @@ export default function Diary({
   onDelete,
   onDateChange,
 }) {
+  const dispatch = useDispatch();
+  const allProducts = useSelector((state) => state.products.list);
   // Tarih (controlled/uncontrolled destekli)
-  const [productList, setProductList] = useState([]);
+  const [productList, setPrductList] = useState([]);
   const [localDate, setLocalDate] = useState(date);
   useEffect(() => {
     setLocalDate(date);
-    const setProducts = () => {
-      api.get("/products").then((res) => {
-        console.log(res);
-        const list = res.data.data.map((p) => ({
-          value: p.title,
-          label: p.title,
-        }));
-        setProductList(list);
-      });
-    };
-    setProducts();
   }, [date]);
-  useEffect(() => {}, []);
 
-  const currentDate = onDateChange ? date : localDate;
+  useEffect(() => {
+    dispatch(getProducts()).then((res) =>
+      setPrductList(res.payload.map((p) => ({ value: p.name, label: p.name })))
+    );
+  }, [dispatch, allProducts]);
+
+  const currentDate = onDateChange ? new Date() : localDate;
 
   const handleDatePick = (d) => {
     if (!d) return;
@@ -117,6 +114,7 @@ export default function Diary({
   return (
     <div className={styles.DiaryPage}>
       {/* Toast container */}
+
       <ToastContainer position="top-center" autoClose={2500} />
 
       {/* Content */}

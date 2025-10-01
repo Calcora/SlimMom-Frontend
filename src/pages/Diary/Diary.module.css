@@ -482,6 +482,7 @@
         grid-template-rows: auto 1fr;
         min-height: 100vh;
         background: #fff;
+        align-items: first baseline;
     }
 
     /* Brand bar sadece solda */
@@ -518,6 +519,7 @@
         background-position: right center;
         background-size: auto 80%;
         margin-top: 0;
+        align-items: center;
     }
 
     /* Sağ üst: Nic | Exit */

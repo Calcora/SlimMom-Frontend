@@ -197,6 +197,11 @@
     color: #9B9FAA;
     font-weight: 400;
     margin: 0;
+    height: 200px;
+    overflow-y: auto;
+    display: flex;
+    flex-direction: column;
+    gap: 8px
 }
 
 /* Desktop Summary - Hidden on Mobile */
@@ -320,19 +325,22 @@
 @media screen and (min-width: 1280px) {
     .contentWrapper {
         flex-direction: row;
-        justify-content: center;
-        align-items: flex-start;
-        padding: 140px 20px 40px;
-        max-width: 1280px;
-        margin: 0 auto;
-        min-height: 100vh;
-        background-color: #FFFFFF;
+        justify-content: space-between;
+        align-items: first;
+        /* padding: 140px 20px 40px; */
+        /* max-width: 1280px; */
+        /* margin: 0 auto; */
+        height: 100vh;
+        width: 100%;
+
+        /* background-color: #FFFFFF; */
     }
 
     .formSection {
-        flex: 1;
-        max-width: 640px;
-        padding: 0;
+        flex: 4;
+        /* max-width: 640px; */
+        padding-inline-start: 30px;
+        align-content: space-around;
     }
 
     .title {
@@ -400,13 +408,21 @@
 
     /* Show desktop summary */
     .summaryDesktop {
+        flex: 1;
         display: block;
         flex-shrink: 0;
-        width: 288px;
+        /* width: 288px; */
         padding: 40px 24px;
         background-color: #F5F5F5;
-        height: fit-content;
-        margin-left: 100px;
+        /* height: fit-content; */
+        /* margin-left: 100px; */
+        height: 100%;
+        align-content: space-around;
+
+    }
+
+    .summaryDesktop>div {
+        margin-block: 150px;
     }
 
     .summaryDesktop .summaryTitle {

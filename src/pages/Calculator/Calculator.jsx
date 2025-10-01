@@ -1,7 +1,17 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import styles from "./Calculator.module.css";
+import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
+import { useDispatch, useSelector } from "react-redux";
+import { getTodayDiary } from "../../redux/userDiary/operations.js";
 const Calculator = () => {
+  const { selectedDate, data } = useSelector((state) => state.userDiary);
+  const dispatch = useDispatch();
+  useEffect(() => {
+    dispatch(getTodayDiary());
+  }, [dispatch]);
+
   const [formData, setFormData] = useState({
     height: "",
     age: "",
@@ -25,12 +35,12 @@ const Calculator = () => {
   };
 
   const summaryData = {
-    date: "13.08.2023",
+    date: selectedDate || new Date().toISOString().split("T")[0],
     stats: [
-      { label: "Left", value: "000 kcal" },
-      { label: "Consumed", value: "000 kcal" },
-      { label: "Daily rate", value: "000 kcal" },
-      { label: "n% of normal", value: "000 kcal" },
+      { label: "Left", value: data.left + " kcal" },
+      { label: "Consumed", value: data.consumed + " kcal" },
+      { label: "Daily rate", value: data.dailyRate + " kcal" },
+      { label: "n% of normal", value: data.nOfNormal + "%" },
     ],
   };
 
@@ -38,6 +48,7 @@ const Calculator = () => {
     <div className={styles.contentWrapper}>
       {/* Form Section */}
       <section className={styles.formSection}>
+        <ToastContainer position={"bottom-right"} autoClose={2500} />
         <h1 className={styles.title}>
           Calculate your daily calorie intake right now
         </h1>
@@ -141,25 +152,42 @@ const Calculator = () => {
 
           <div className={styles.summaryRight}>
             <h2 className={styles.summaryTitle}>Food not recommended</h2>
-            <p className={styles.dietText}>Your diet will be displayed here</p>
+            <p className={styles.dietText}>
+              {data.notAllowedProducts.length > 0
+                ? data.notAllowedProducts.map((item, idx) => (
+                    <span key={idx}>{item}</span>
+                  ))
+                : "Your diet will be displayed here"}
+            </p>
           </div>
         </div>
       </section>
 
       {/* Summary Sidebar - Desktop */}
       <aside className={styles.summaryDesktop}>
-        <h2 className={styles.summaryTitle}>Summary for {summaryData.date}</h2>
-        <ul className={styles.statsList}>
-          {summaryData.stats.map((stat, index) => (
-            <li key={index}>
-              <span className={styles.statLabel}>{stat.label}</span>
-              <span className={styles.statValue}>{stat.value}</span>
-            </li>
-          ))}
-        </ul>
-
-        <h2 className={styles.summaryTitle}>Food not recommended</h2>
-        <p className={styles.dietText}>Your diet will be displayed here</p>
+        <div>
+          <h2 className={styles.summaryTitle}>
+            Summary for {summaryData.date}
+          </h2>
+          <ul className={styles.statsList}>
+            {summaryData.stats.map((stat, index) => (
+              <li key={index}>
+                <span className={styles.statLabel}>{stat.label}</span>
+                <span className={styles.statValue}>{stat.value}</span>
+              </li>
+            ))}
+          </ul>
+        </div>
+        <div>
+          <h2 className={styles.summaryTitle}>Food not recommended</h2>
+          <p className={styles.dietText}>
+            {data.notAllowedProducts.length > 0
+              ? data.notAllowedProducts.map((item, idx) => (
+                  <span key={idx}>{item}</span>
+                ))
+              : "Your diet will be displayed here"}
+          </p>
+        </div>
       </aside>
     </div>
   );

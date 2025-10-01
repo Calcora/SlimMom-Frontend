@@ -9,8 +9,8 @@ import ProtectedRoute from "./components/ProtectedRoute";
 const PublicCalculator = lazy(() =>
   import("./pages/PublicCalculator/PublicCalculator")
 );
-const PrivateDiary = lazy(() => import("./pages/Diary/Diary"));
-const PrivateCalculator = lazy(() => import("./pages/Calculator/Calculator"));
+const Diary = lazy(() => import("./pages/Diary/Diary"));
+const Calculator = lazy(() => import("./pages/Calculator/Calculator"));
 const Login = lazy(() => import("./pages/Login/Login"));
 const Logout = lazy(() => import("./pages/Logout"));
 const Register = lazy(() => import("./pages/Register/Register"));
@@ -53,7 +53,7 @@ const App = () => {
           element={
             <ProtectedRoute>
               <Page>
-                <PrivateDiary />
+                <Diary />
               </Page>
             </ProtectedRoute>
           }
@@ -63,7 +63,7 @@ const App = () => {
           element={
             <ProtectedRoute>
               <Page>
-                <PrivateCalculator />
+                <Calculator />
               </Page>
             </ProtectedRoute>
           }
